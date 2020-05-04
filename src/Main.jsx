@@ -1,9 +1,15 @@
 import React from 'react';
 
 class Main extends React.Component {
+  clickHandler = () => {
+    alert('works')
+  }
+
   render() {
     return (
-      <div>1</div>
+      <div
+        onClick={this.clickHandler}
+      >1</div>
     );
   }
 }

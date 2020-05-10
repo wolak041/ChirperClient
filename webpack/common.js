@@ -2,13 +2,14 @@ const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = (env) => {
-  console.log(`\n🚀🚀🚀 RUNNING CHIRPER CLIENT IN ${env.production ? 'PRODUCTION' : 'DEVELOPMENT'} 🚀🚀🚀\n`);
+  console.log(`\n🚀🚀🚀 RUNNING CHIRPER CLIENT IN ${env.production ? 'PRODUCTION' : 'DEVELOPMENT'} MODE 🚀🚀🚀\n`);
 
   return {
     entry: './src/index.js',
     output: {
       filename: 'main.js',
       path: path.resolve(__dirname, '../dist'),
+      publicPath: '/'
     },
     plugins: [
       new HtmlWebPackPlugin({

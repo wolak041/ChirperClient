@@ -12,7 +12,10 @@ module.exports = (env) => {
       watchContentBase: true,
       compress: true,
       stats: 'minimal',
-      hot: true
+      hot: true,
+      proxy: {
+        '/api': 'http://localhost:3000/'
+      }
     },
     plugins: [
       new webpack.NamedModulesPlugin(),

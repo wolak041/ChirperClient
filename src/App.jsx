@@ -1,6 +1,7 @@
 import React from 'react';
+import './assets/styles/app.scss';
 
-class Main extends React.Component {
+class App extends React.Component {
   clickHandler = () => {
     alert('works')
   }
@@ -14,4 +15,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default App;

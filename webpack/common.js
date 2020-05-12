@@ -1,24 +1,30 @@
 const path = require('path');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const WebpackBar = require('webpackbar');
 
 module.exports = (env) => {
-  console.log(`\n🚀🚀🚀 RUNNING CHIRPER CLIENT IN ${env.production ? 'PRODUCTION' : 'DEVELOPMENT'} MODE 🚀🚀🚀\n`);
+  console.log(
+    `\n🚀🚀🚀 RUNNING CHIRPER CLIENT IN ${
+      env.production ? 'PRODUCTION' : 'DEVELOPMENT'
+    } MODE 🚀🚀🚀\n`,
+  );
 
   return {
     entry: './src/index.js',
     output: {
       filename: 'main.js',
+      publicPath: '/',
       path: path.resolve(__dirname, '../dist'),
-      publicPath: '/'
     },
     plugins: [
       new HtmlWebPackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
-        favicon: path.resolve(__dirname, '../public/favicon.ico')
-      })
+        favicon: path.resolve(__dirname, '../public/favicon.ico'),
+      }),
+      new WebpackBar()
     ],
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx'],
     },
     module: {
       rules: [
@@ -27,8 +33,8 @@ module.exports = (env) => {
           use: {
             loader: 'babel-loader',
             options: {
-              cacheDirectory: true
-            }
+              cacheDirectory: true,
+            },
           },
           exclude: path.resolve(__dirname, '../node_modules'),
         },
@@ -40,16 +46,16 @@ module.exports = (env) => {
               loader: 'css-loader',
               options: {
                 modules: true,
-                sourceMap: !env.production
-              }
+                sourceMap: !env.production,
+              },
             },
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: !env.production
-              }
-            }
-          ]
+                sourceMap: !env.production,
+              },
+            },
+          ],
         },
         {
           test: /\.scss$/,
@@ -58,12 +64,12 @@ module.exports = (env) => {
             {
               loader: 'css-loader',
               options: {
-                importLoaders: 1
-              }
+                importLoaders: 1,
+              },
             },
-            'sass-loader'
+            'sass-loader',
           ],
-          exclude: [/\.module\.s(a|c)ss$/, /node_modules/]
+          exclude: [/\.module\.s(a|c)ss$/, /node_modules/],
         },
         {
           test: /\.(png|svg|jpe?g|gif)$/i,
@@ -72,14 +78,14 @@ module.exports = (env) => {
               loader: 'file-loader',
               options: {
                 outputPath: 'images',
-              }
-            }
-          ]
-        }
-      ]
+              },
+            },
+          ],
+        },
+      ],
     },
     performance: {
-      hints: false
-    }
-  }
+      hints: false,
+    },
+  };
 };

@@ -13,6 +13,7 @@ module.exports = (env) => {
       compress: true,
       stats: 'minimal',
       hot: true,
+      historyApiFallback: true,
       proxy: {
         '/api': 'http://localhost:3000/'
       }

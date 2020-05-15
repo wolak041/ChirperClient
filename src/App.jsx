@@ -1,64 +1,47 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './assets/styles/app.scss';
-import getUser from './services/getUser';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  // Redirect
 } from "react-router-dom";
 import loadable from '@loadable/component'
+import { connect } from "react-redux";
+import { fetchUser } from './redux/actions/user';
+import { getUserState } from './redux/selectors';
 import Loading from './components/Loading/Loading';
 
-const Entry = loadable(() => import('./pages/Entry/Entry'), {
+const Entry = loadable(() => import('./views/Entry/Entry'), {
   fallback: <Loading />
 });
 
-const MainFeed = loadable(() => import('./pages/MainFeed/MainFeed'), {
+const MainFeed = loadable(() => import('./views/MainFeed/MainFeed'), {
   fallback: <Loading />
 });
 
-const ManageAccount = loadable(() => import('./pages/ManageAccount/ManageAccount'), {
+const ManageAccount = loadable(() => import('./views/ManageAccount/ManageAccount'), {
   fallback: <Loading />
 });
 
-const UserFeed = loadable(() => import('./pages/UserFeed/UserFeed'), {
+const UserFeed = loadable(() => import('./views/UserFeed/UserFeed'), {
   fallback: <Loading />
 });
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      status: 'pending',
-      error: null,
-      user: null
-    }
-  }
-
   componentDidMount() {
-    this.handleGetUser()
-  }
-
-  async handleGetUser() {
-    try {
-      const { user } = await getUser();
-      this.setState({ status: 'success', error: null, user });
-
-    } catch (error) {
-      this.setState({ status: 'error', error: error.message, user: null });
-    }
+    this.props.fetchUser();
   }
 
   render() {
-    const { status } = this.state;
-
+    // const { status } = this.state;
+    //TODO: fix protected paths use react context or Redux store
     return (
       <Router>
         <div className="app-container">
-          {status === 'success' && <Redirect to="/" />}
-          {status === 'error' && <Redirect to='/entry' />}
+          {/* {status === 'success' && <Redirect to="/" />}
+          {status === 'error' && <Redirect to='/entry' />} */}
           <Switch>
             <Route path="/user/:userId">
               <UserFeed />
@@ -79,4 +62,11 @@ class App extends React.Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  fetchUser: PropTypes.func,
+  store: PropTypes.any
+}
+
+const mapStateToProp = state => getUserState(state);
+
+export default connect(mapStateToProp, { fetchUser })(App);

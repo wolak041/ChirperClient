@@ -8,7 +8,7 @@
     "build": "npm run lint && webpack -p --config=webpack/prod.js --env.production",
     "api:build": "npm run build && npm run api:clear-build && npm run api:copy-build",
     "api:clear-build": "rimraf ../api/public/*",
-    "api:copy-build": "copyfiles --up 1 dist/**/*.* ../api/public",
+    "api:copy-build": "copyfiles -e dist/report.html -u 1 dist/**/*.* ../api/public",
     "prettier-watch": "onchange \"src/**/*\" -- prettier --write {{changed}}",
     "lint": "eslint src",
     "test": "echo \"Error: no test specified\" && exit 1"

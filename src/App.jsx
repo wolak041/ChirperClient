@@ -1,31 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './assets/styles/app.scss';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  // Redirect
-} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import loadable from '@loadable/component'
 import { connect } from "react-redux";
 import { fetchUser } from './redux/actions/user';
 import { getUserState } from './redux/selectors';
-import Loading from './components/Loading/Loading';
+import { statusIndicators } from './helpers/constants';
+import { Loading } from './components';
+import './assets/styles/app.scss';
 
-const Entry = loadable(() => import('./views/Entry/Entry'), {
+const AuthenticatedApp = loadable(() => import(/* webpackChunkName: "auth-app" */ './AuthenticatedApp'), {
   fallback: <Loading />
 });
 
-const MainFeed = loadable(() => import('./views/MainFeed/MainFeed'), {
-  fallback: <Loading />
-});
-
-const ManageAccount = loadable(() => import('./views/ManageAccount/ManageAccount'), {
-  fallback: <Loading />
-});
-
-const UserFeed = loadable(() => import('./views/UserFeed/UserFeed'), {
+const UnauthenticatedApp = loadable(() => import(/* webpackChunkName: "unauth-app" */ './UnauthenticatedApp'), {
   fallback: <Loading />
 });
 
@@ -34,28 +22,22 @@ class App extends React.Component {
     this.props.fetchUser();
   }
 
+  displayApp() {
+    switch (this.props.status) {
+      case statusIndicators.PENDING:
+        return <Loading />
+      case statusIndicators.SUCCESS:
+        return <AuthenticatedApp />
+      case statusIndicators.ERROR:
+        return <UnauthenticatedApp />
+    }
+  }
+
   render() {
-    // const { status } = this.state;
-    //TODO: fix protected paths use react context or Redux store
     return (
       <Router>
         <div className="app-container">
-          {/* {status === 'success' && <Redirect to="/" />}
-          {status === 'error' && <Redirect to='/entry' />} */}
-          <Switch>
-            <Route path="/user/:userId">
-              <UserFeed />
-            </Route>
-            <Route path="/account">
-              <ManageAccount />
-            </Route>
-            <Route path="/entry">
-              <Entry />
-            </Route>
-            <Route path="/">
-              <MainFeed />
-            </Route>
-          </Switch>
+          {this.displayApp()}
         </div>
       </Router>
     );
@@ -64,7 +46,7 @@ class App extends React.Component {
 
 App.propTypes = {
   fetchUser: PropTypes.func,
-  store: PropTypes.any
+  status: PropTypes.string
 }
 
 const mapStateToProp = state => getUserState(state);

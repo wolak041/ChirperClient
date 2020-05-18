@@ -8,7 +8,7 @@ module.exports = (env) => {
     mode: 'development',
     devtool: 'eval',
     devServer: {
-      contentBase: './public',
+      contentBase: path.join(__dirname, '/public'),
       watchContentBase: true,
       compress: true,
       stats: 'minimal',

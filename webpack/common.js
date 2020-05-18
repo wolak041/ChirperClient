@@ -10,7 +10,7 @@ module.exports = (env) => {
   );
 
   return {
-    entry: './src/index.js',
+    entry: path.resolve(__dirname, '../src/index.js'),
     output: {
       filename: 'main.js',
       publicPath: '/',
@@ -36,7 +36,7 @@ module.exports = (env) => {
               cacheDirectory: true,
             },
           },
-          exclude: path.resolve(__dirname, '../node_modules'),
+          exclude: [/node_modules/],
         },
         {
           test: /\.module\.s(a|c)ss$/,

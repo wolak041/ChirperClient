@@ -1,4 +1,4 @@
-import apiUrls from './apiUrls';
+import {apiUrls, clientUrls} from './urls';
 import statusIndicators from './statusIndicators';
 
-export { apiUrls, statusIndicators };
+export { apiUrls, clientUrls, statusIndicators };

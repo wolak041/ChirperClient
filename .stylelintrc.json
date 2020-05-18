@@ -1,0 +1,5 @@
+{
+  "extends": "stylelint-config-sass-guidelines",
+  "plugins": ["stylelint-order"],
+  "ignoreFiles": ["**/*.js", "./node_modules/**/*.{css, scss}", "./dist/**/*.{css, scss}"]
+}

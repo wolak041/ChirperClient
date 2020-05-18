@@ -22,7 +22,14 @@
   "rules": {
     "no-useless-escape": "off",
     "no-case-declarations": "off",
-    "react/prop-types": [2, { "ignore": ["children"] }]
+    "react/prop-types": [
+      2,
+      {
+        "ignore": [
+          "children"
+        ]
+      }
+    ]
   },
   "parserOptions": {
     "ecmaVersion": 2019,
@@ -31,5 +38,8 @@
       "jsx": true
     }
   },
-  "ignorePatterns": ["./dist/", "./node_modules/"]
+  "ignorePatterns": [
+    "./dist/",
+    "./node_modules/"
+  ]
 }

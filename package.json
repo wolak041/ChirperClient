@@ -10,7 +10,7 @@
     "api:clear-build": "rimraf ../api/public/*",
     "api:copy-build": "copyfiles -e dist/report.html -u 1 dist/**/*.* ../api/public",
     "prettier-watch": "onchange \"src/**/*\" -- prettier --write {{changed}}",
-    "lint": "eslint src",
+    "lint": "eslint src && stylelint src/**/*.scss",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -63,6 +63,10 @@
     "rimraf": "^3.0.2",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
+    "stylelint": "^13.4.0",
+    "stylelint-config-sass-guidelines": "^7.0.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.0.0",
     "terser-webpack-plugin": "^3.0.0",
     "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^3.7.0",

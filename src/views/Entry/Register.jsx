@@ -1,64 +1,73 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Entry.module.scss';
-import { Input, Button } from '../../components';
+import { Text, Button, HelperText } from '../../components';
 
 const Register = (props) => {
-  const { forename, surname, email, password, repeatPassword } = props;
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = props.formik;
 
   return (
-    <form className={styles.form}>
-      <Input
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit}
+    >
+      <Text
         type="text"
-        id="forename"
+        name="forename"
         label="Forename"
-        value={forename}
-        handleChange={props.handleInputChange}
-      />
-      <Input
+        value={values.forename}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+      >
+        <HelperText type="error">{touched.forename && errors.forename}</HelperText>
+      </Text>
+      <Text
         type="text"
-        id="surname"
+        name="surname"
         label="Surname"
-        value={surname}
-        handleChange={props.handleInputChange}
-      />
-      <Input
+        value={values.surname}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+      >
+        <HelperText type="error">{touched.surname && errors.surname}</HelperText>
+      </Text>
+      <Text
         type="email"
-        id="email"
+        name="email"
         label="Email"
-        value={email}
-        handleChange={props.handleInputChange}
-      />
-      <Input
+        value={values.email}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+      >
+        <HelperText type="error">{touched.email && errors.email}</HelperText>
+      </Text>
+      <Text
         type="password"
-        id="password"
+        name="password"
         label="Password"
-        value={password}
-        handleChange={props.handleInputChange}
-      />
-      <Input
+        value={values.password}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+      >
+        <HelperText type="error">{touched.password && errors.password}</HelperText>
+      </Text>
+      <Text
         type="password"
-        id="repeatPassword"
+        name="repeatPassword"
         label="Repeat password"
-        value={repeatPassword}
-        handleChange={props.handleInputChange}
-      />
-      <Button
-        handleClick={props.handleFormSubmit}
-        attributes={{ type: 'button' }}
-      >Sign up</Button>
+        value={values.repeatPassword}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+      >
+        <HelperText type="error">{touched.repeatPassword && errors.repeatPassword}</HelperText>
+      </Text>
+      <Button attributes={{ type: 'submit' }}>Sign up</Button>
     </form>
   );
 }
 
 Register.propTypes = {
-  handleInputChange: PropTypes.func,
-  handleFormSubmit: PropTypes.func,
-  forename: PropTypes.string,
-  surname: PropTypes.string,
-  email: PropTypes.string,
-  password: PropTypes.string,
-  repeatPassword: PropTypes.string
+  formik: PropTypes.object,
 }
 
 export default Register;

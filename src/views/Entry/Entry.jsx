@@ -1,95 +1,111 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Entry.module.scss';
 import chirpy from '../../assets/images/chirpy.svg';
 import Login from './Login';
 import Register from './Register';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-class Entry extends React.Component {
-  MODES = {
-    LOGIN: 'login',
-    REGISTER: 'register'
+const MODES = {
+  LOGIN: 'login',
+  REGISTER: 'register'
+};
+
+const login = {
+  initialValues: {
+    email: '',
+    password: ''
+  },
+  validationSchema: Yup.object({
+    email: Yup.string().email('Invalid email address').required('Required'),
+    password: Yup.string().required('Required'),
+  }),
+  handleSubmit: (values) => {
+    console.log(values);
+  }
+};
+
+const register = {
+  initialValues: {
+    forename: '',
+    surname: '',
+    email: '',
+    password: '',
+    repeatPassword: ''
+  },
+  validationSchema: Yup.object().shape({
+    forename: Yup.string().required('Required'),
+    surname: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email address').required('Required'),
+    password: Yup.string().required('Required'),
+    repeatPassword: Yup.string().required('Required')
+  }),
+  handleSubmit: (values) => {
+    console.log(values);
+  }
+}
+
+const Entry = () => {
+  const loginFormik = useFormik({
+    initialValues: login.initialValues,
+    validationSchema: login.validationSchema,
+    onSubmit: login.handleSubmit,
+    validateOnChange: false
+  });
+
+  const registerFormik = useFormik({
+    initialValues: register.initialValues,
+    validationSchema: register.validationSchema,
+    onSubmit: register.handleSubmit,
+    validateOnChange: false
+  });
+
+  const [mode, setMode] = useState(MODES.LOGIN);
+  const handleModeToggle = () => {
+    setMode(prevMode => {
+      const isPrevModeLogin = prevMode === MODES.LOGIN;
+      isPrevModeLogin ? loginFormik.setErrors({}) : registerFormik.setErrors({});
+
+      return isPrevModeLogin ? MODES.REGISTER : MODES.LOGIN
+    });
   }
 
-  state = {
-    mode: this.MODES.LOGIN,
-    [this.MODES.LOGIN]: {
-      email: '',
-      password: ''
-    },
-    [this.MODES.REGISTER]: {
-      forename: '',
-      surname: '',
-      email: '',
-      password: '',
-      repeatPassword: ''
-    }
-  }
-
-  handleModeToggle = () => {
-    const { LOGIN, REGISTER } = this.MODES
-    this.setState(prevState => ({ mode: prevState.mode === LOGIN ? REGISTER : LOGIN }));
-  }
-
-  handleInputChange = (event) => {
-    const { value, id } = event.target
-
-    this.setState(prevState => ({
-      [prevState.mode]: {
-        ...prevState[prevState.mode],
-        [id]: value
-      }
-    }));
-  }
-
-  handleFormSubmit = (event) => {
-    event.preventDefault();
-  }
-
-  render() {
-    const { mode, login, register } = this.state;
-    const { LOGIN, REGISTER } = this.MODES
-
-    return (
-      <div className={styles.entry}>
-        <div className={styles.logo}>
-          <img src={chirpy} alt="logo" />
-          <div>Chirper</div>
-        </div>
-        <div className={styles.formWrapper}>
-          <div className={styles.formSwitch}>
-            <label htmlFor="login">Login</label>
-            <input
-              type="radio"
-              name="mode"
-              id="login"
-              checked={mode === LOGIN}
-              onChange={this.handleModeToggle}
-            />
-            <label htmlFor="register">Register</label>
-            <input
-              type="radio"
-              name="mode"
-              id="register"
-              checked={mode === REGISTER}
-              onChange={this.handleModeToggle}
-            />
-          </div>
-          {mode === LOGIN
-            ? <Login
-              handleInputChange={this.handleInputChange}
-              handleFormSubmit={this.handleFormSubmit}
-              {...login}
-            />
-            : <Register
-              handleInputChange={this.handleInputChange}
-              handleFormSubmit={this.handleFormSubmit}
-              {...register}
-            />
-          }
-        </div>
+  return (
+    <div className={styles.entry}>
+      <div className={styles.logo}>
+        <img src={chirpy} alt="logo" />
+        <div>Chirper</div>
       </div>
-    );
-  }
+      <div className={styles.formWrapper}>
+        <div className={styles.formSwitch}>
+          <label htmlFor="login">Login</label>
+          <input
+            type="radio"
+            name="mode"
+            id="login"
+            checked={mode === MODES.LOGIN}
+            onChange={handleModeToggle}
+          />
+          <label htmlFor="register">Register</label>
+          <input
+            type="radio"
+            name="mode"
+            id="register"
+            checked={mode === MODES.REGISTER}
+            onChange={handleModeToggle}
+          />
+        </div>
+        {mode === MODES.LOGIN
+          ? <Login
+            formik={loginFormik}
+          />
+          : <Register
+            formik={registerFormik}
+          />
+        }
+      </div>
+    </div>
+  );
 }
 
 export default Entry;

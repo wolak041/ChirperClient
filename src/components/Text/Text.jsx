@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Input.module.scss';
+import styles from './Text.module.scss';
 
 const Input = (props) => {
   const { type, name, label, id, value, classes, attributes } = props;
@@ -19,6 +19,7 @@ const Input = (props) => {
         className={`${classes?.input} ${styles.input}`}
         value={value}
         onChange={props.handleChange}
+        onBlur={props.handleBlur}
         id={id}
         {...attributes}
       />
@@ -29,6 +30,7 @@ const Input = (props) => {
 
 Input.propTypes = {
   handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func,
   type: PropTypes.string.isRequired,
   name: PropTypes.string,
   label: PropTypes.string,

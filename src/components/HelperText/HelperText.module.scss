@@ -1,0 +1,13 @@
+.helperText {
+  &.info {
+    color: yellow;
+  }
+
+  &.success {
+    color: green;
+  }
+
+  &.error {
+    color: red;
+  }
+}

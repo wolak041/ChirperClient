@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import styles from './Entry.module.scss';
 import chirpy from '../../assets/images/chirpy.svg';
 import Login from './Login';
 import Register from './Register';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { loginUser, registerUser, isNicknameAvailable, isEmailAvailable } from '../../helpers/services';
 
 const MODES = {
   LOGIN: 'login',
@@ -17,33 +18,55 @@ const login = {
     password: ''
   },
   validationSchema: Yup.object({
-    email: Yup.string().email('Invalid email address').required('Required'),
-    password: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email address').required('Field required'),
+    password: Yup.string().required('Field required'),
   }),
-  handleSubmit: (values) => {
-    console.log(values);
+  handleSubmit: async (values, formik) => {
+    try {
+      const response = await loginUser(values);
+      formik.setStatus({ formInfo: response.message });
+
+    } catch (err) {
+      formik.setStatus({});
+      formik.setErrors({ formError: err.message });
+    }
   }
 };
 
 const register = {
   initialValues: {
-    forename: '',
-    surname: '',
+    nickname: '',
     email: '',
     password: '',
     repeatPassword: ''
   },
   validationSchema: Yup.object().shape({
-    forename: Yup.string().required('Required'),
-    surname: Yup.string().required('Required'),
-    email: Yup.string().email('Invalid email address').required('Required'),
-    password: Yup.string().required('Required'),
-    repeatPassword: Yup.string().required('Required')
+    nickname: Yup.string().min(3, 'Nickname must be at least 6 character long')
+      .matches(/^[a-zA-Z0-9_-]*$/g, 'Nickname can contains only alphanumeric characters, underscores and dashes')
+      .required('Field required'),
+    email: Yup.string().email('Invalid email address').required('Field required'),
+    password: Yup.string().min(6, 'Password must be at least 6 character long')
+      .required('Field required'),
+    repeatPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Field required')
   }),
-  handleSubmit: (values) => {
-    console.log(values);
+  handleSubmit: async (values, formik) => {
+    try {
+      if (!await isNicknameAvailable(values.nickname)) {
+        throw new Error('Nickname is already in use');
+
+      } else if (!await isEmailAvailable(values.email)) {
+        throw new Error('Email is already in use');
+
+      } else {
+        const response = await registerUser(values);
+        formik.setStatus({ formInfo: response.message });
+      }
+    } catch (err) {
+      formik.setStatus({});
+      formik.setErrors({ formError: err.message });
+    }
   }
-}
+};
 
 const Entry = () => {
   const loginFormik = useFormik({
@@ -56,6 +79,7 @@ const Entry = () => {
   const registerFormik = useFormik({
     initialValues: register.initialValues,
     validationSchema: register.validationSchema,
+    validate: register.validate,
     onSubmit: register.handleSubmit,
     validateOnChange: false
   });
@@ -64,11 +88,19 @@ const Entry = () => {
   const handleModeToggle = () => {
     setMode(prevMode => {
       const isPrevModeLogin = prevMode === MODES.LOGIN;
-      isPrevModeLogin ? loginFormik.setErrors({}) : registerFormik.setErrors({});
+
+      if (isPrevModeLogin) {
+        loginFormik.setErrors({});
+        loginFormik.setStatus({});
+
+      } else {
+        registerFormik.setErrors({});
+        registerFormik.setStatus({});
+      }
 
       return isPrevModeLogin ? MODES.REGISTER : MODES.LOGIN
     });
-  }
+  };
 
   return (
     <div className={styles.entry}>

@@ -1,4 +1,4 @@
-import { FETCH_USER_PENDING, FETCH_USER_SUCCESS, FETCH_USER_ERROR } from '../actions/actionTypes';
+import { USER_PENDING, USER_SUCCESS, USER_ERROR } from '../actions/actionTypes';
 import { statusIndicators } from '../../helpers/constants';
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_USER_PENDING: {
+    case USER_PENDING: {
       return {
         ...state,
         status: statusIndicators.PENDING,
@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
         user: null,
       };
     }
-    case FETCH_USER_SUCCESS: {
+    case USER_SUCCESS: {
       const { user } = action.payload;
       return {
         ...state,
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
         user,
       };
     }
-    case FETCH_USER_ERROR: {
+    case USER_ERROR: {
       const { error } = action.payload;
       return {
         ...state,

@@ -4,7 +4,7 @@ import styles from './Entry.module.scss';
 import { Text, Button, HelperText } from '../../components';
 
 const Register = (props) => {
-  const { values, errors, status, touched, isValid, isSubmitting, handleChange, handleBlur, handleSubmit } = props.formik;
+  const { values, errors, status, touched, isSubmitting, handleChange, handleBlur, handleSubmit } = props.formik;
 
   return (
     <>
@@ -62,7 +62,7 @@ const Register = (props) => {
         </Text>
         <Button
           attributes={{ type: 'submit' }}
-          disabled={!isValid || isSubmitting}
+          disabled={isSubmitting}
         >Sign up</Button>
       </form>
       {errors?.formError && <HelperText type="error">{errors.formError}</HelperText>}

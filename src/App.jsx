@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import loadable from '@loadable/component'
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from './redux/actions/user';
 import { getUserState } from './redux/selectors';
 import { statusIndicators } from './helpers/constants';
@@ -17,38 +16,32 @@ const UnauthenticatedApp = loadable(() => import(/* webpackChunkName: "unauth-ap
   fallback: <Loading />
 });
 
-class App extends React.Component {
-  componentDidMount() {
-    this.props.fetchUser();
+const displayApp = (status) => {
+  switch (status) {
+    case statusIndicators.PENDING:
+      return <Loading />
+    case statusIndicators.SUCCESS:
+      return <AuthenticatedApp />
+    case statusIndicators.ERROR:
+      return <UnauthenticatedApp />
   }
+};
 
-  displayApp() {
-    switch (this.props.status) {
-      case statusIndicators.PENDING:
-        return <Loading />
-      case statusIndicators.SUCCESS:
-        return <AuthenticatedApp />
-      case statusIndicators.ERROR:
-        return <UnauthenticatedApp />
-    }
-  }
+const App = () => {
+  const { status } = useSelector(state => getUserState(state));
 
-  render() {
-    return (
-      <Router>
-        <div className="app-container">
-          {this.displayApp()}
-        </div>
-      </Router>
-    );
-  }
+  const dispatch = useDispatch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { dispatch(fetchUser()) }, []);
+
+  return (
+    <Router>
+      <div className="app-container">
+        {displayApp(status)}
+      </div>
+    </Router>
+  );
+
 }
 
-App.propTypes = {
-  fetchUser: PropTypes.func,
-  status: PropTypes.string
-}
-
-const mapStateToProp = state => getUserState(state);
-
-export default connect(mapStateToProp, { fetchUser })(App);
+export default App;

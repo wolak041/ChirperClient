@@ -36,9 +36,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="app-container">
-        {displayApp(status)}
-      </div>
+      {displayApp(status)}
     </Router>
   );
 

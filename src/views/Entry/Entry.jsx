@@ -118,7 +118,7 @@ const Entry = () => {
     <div className={styles.entry}>
       <div className={styles.logo}>
         <img src={chirpy} alt="logo" />
-        <div>Chirper</div>
+        <p>Chirper</p>
       </div>
       <div className={styles.formWrapper}>
         <div className={styles.formSwitch}>

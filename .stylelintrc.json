@@ -1,8 +1,22 @@
 {
-  "extends": "stylelint-config-sass-guidelines",
-  "plugins": ["stylelint-order"],
+  "extends": [
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-rational-order"
+  ],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-config-rational-order/plugin"
+  ],
   "rules": {
-    "selector-class-pattern": null
+    "selector-class-pattern": null,
+    "max-nesting-depth": 5,
+    "selector-max-compound-selectors": 5,
+    "order/properties-alphabetical-order": null,
+    "order/properties-order": [],
+    "plugin/rational-order": [true, {
+      "border-in-box-model": false,
+      "empty-line-between-groups": false
+    }]
   },
   "ignoreFiles": ["**/*.js", "./node_modules/**/*.{css, scss}", "./dist/**/*.{css, scss}"]
 }

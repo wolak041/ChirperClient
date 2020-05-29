@@ -1,0 +1,93 @@
+@import '../../assets/styles/variables';
+
+.navbar {
+  display: flex;
+  height: 50px;
+
+  .left {
+    flex: 1;
+  }
+
+  .right {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .logo {
+    display: flex;
+  }
+}
+
+.hamburgerMenu {
+  width: 26px;
+  height: 26px;
+  margin: 2px;
+  padding: 5px;
+  border: 1px solid $primary;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+
+  .menuBox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .menuMiddle {
+      $bar-height: 2px;
+      $bar-offset: 4px;
+
+      top: calc(50% - (#{$bar-height} / 2));
+      transition-duration: 0.5s;
+
+      &,
+      &::before,
+      &::after {
+        position: absolute;
+        width: 100%;
+        height: $bar-height;
+        background-color: $primary;
+        border-radius: 1px;
+      }
+
+      &::before {
+        top: calc(-100% - (#{$bar-height} + #{$bar-offset}));
+        transition: top 0.2s 0.3s ease-in;
+        content: '';
+      }
+
+      &::after {
+        bottom: calc(-100% - (#{$bar-height} + #{$bar-offset}));
+        transition: bottom 0.2s 0.3s ease-in,
+          transform 0.3s ease;
+        content: '';
+      }
+    }
+  }
+
+  &.isActive {
+    .menuMiddle {
+      transform: rotate(225deg);
+      transition-delay: 0.3s;
+
+      &::before {
+        top: 0;
+        opacity: 0;
+        transition: top 0.2s ease-in,
+          opacity 0.3s 0.2s ease-in;
+      }
+
+      &::after {
+        bottom: 0;
+        transform: rotate(-90deg);
+        transition: bottom 0.2s ease-in,
+          transform 0.1s 0.3s ease;
+      }
+    }
+  }
+
+  &:hover {
+    border-color: $primary-active;
+  }
+}

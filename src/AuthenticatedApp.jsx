@@ -12,7 +12,7 @@ const AuthenticatedApp = () => {
         <Route exact path={clientUrls.MAIN}>
           <MainFeed />
         </Route>
-        <Route path={clientUrls.USER}>
+        <Route path={`${clientUrls.USER}/:userId`}>
           <UserFeed />
         </Route>
         <Route path={clientUrls.ACCOUNT}>

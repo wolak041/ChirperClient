@@ -12,6 +12,6 @@ export const apiUrls = {
 export const clientUrls = {
   MAIN: '/',
   ENTRY: '/entry',
-  USER: '/user/:userId',
+  USER: '/user',
   ACCOUNT: '/account'
 }

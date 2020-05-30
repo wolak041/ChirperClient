@@ -3,31 +3,77 @@
 .navbar {
   display: flex;
   height: 50px;
-
-  .left {
-    flex: 1;
-  }
+  background-color: $nav-bg;
 
   .right {
     display: flex;
     flex: 1;
+    align-items: center;
     justify-content: flex-end;
   }
 
   .logo {
-    display: flex;
+    margin: 3px 7px;
+    padding: 2px 7px;
+    background-color: transparent;
+    border: 0;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+
+      img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
+
+      p {
+        margin: 0;
+        color: $primary;
+        font-weight: 900;
+        font-size: 28px;
+        letter-spacing: 0.1em;
+      }
+    }
+
+
+    &:hover {
+      background-color: darken($transparent-bg, 20%);
+    }
+
+    &:focus {
+      background-color: darken($transparent-bg, 20%);
+    }
+
+    &:active {
+      background-color: darken($transparent-bg, 30%);
+    }
+
+    &::-moz-focus-inner {
+      border: 0;
+    }
   }
 }
 
 .hamburgerMenu {
+  box-sizing: content-box;
   width: 26px;
   height: 26px;
-  margin: 2px;
-  padding: 5px;
-  border: 1px solid $primary;
+  margin: 3px 7px;
+  padding: 9px;
+  background-color: transparent;
+  border: 0;
   border-radius: 4px;
+  outline: none;
   cursor: pointer;
-  transition: border-color 0.2s ease;
+  transition: background-color 0.2s ease;
 
   .menuBox {
     position: relative;
@@ -36,7 +82,7 @@
 
     .menuMiddle {
       $bar-height: 2px;
-      $bar-offset: 4px;
+      $bar-offset: 8px;
 
       top: calc(50% - (#{$bar-height} / 2));
       transition-duration: 0.5s;
@@ -52,15 +98,16 @@
       }
 
       &::before {
-        top: calc(-100% - (#{$bar-height} + #{$bar-offset}));
+        top: $bar-offset;
+        left: 0;
         transition: top 0.2s 0.3s ease-in;
         content: '';
       }
 
       &::after {
-        bottom: calc(-100% - (#{$bar-height} + #{$bar-offset}));
-        transition: bottom 0.2s 0.3s ease-in,
-          transform 0.3s ease;
+        bottom: $bar-offset;
+        left: 0;
+        transition: bottom 0.2s 0.3s ease-in, transform 0.3s ease;
         content: '';
       }
     }
@@ -74,20 +121,30 @@
       &::before {
         top: 0;
         opacity: 0;
-        transition: top 0.2s ease-in,
-          opacity 0.3s 0.2s ease-in;
+        transition: top 0.2s ease-in, opacity 0.3s 0.2s ease-in;
       }
 
       &::after {
         bottom: 0;
         transform: rotate(-90deg);
-        transition: bottom 0.2s ease-in,
-          transform 0.1s 0.3s ease;
+        transition: bottom 0.2s ease-in, transform 0.1s 0.3s ease;
       }
     }
   }
 
   &:hover {
-    border-color: $primary-active;
+    background-color: darken($transparent-bg, 20%);
+  }
+
+  &:focus {
+    background-color: darken($transparent-bg, 20%);
+  }
+
+  &:active {
+    background-color: darken($transparent-bg, 30%);
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
   }
 }

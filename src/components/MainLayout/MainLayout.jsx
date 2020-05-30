@@ -1,19 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from "react-redux";
+import { getUserState } from '../../redux/selectors';
 import Navbar from './Navbar';
 import styles from './MainLayout.module.scss';
 
 const MainLayout = (props) => {
+  const { user } = useSelector(state => getUserState(state));
+
   return (
     <div className={styles.mainLayout}>
-      <Navbar />
+      <Navbar user={user} />
       {props.children}
     </div>
   );
-}
-
-MainLayout.propTypes = {
-  test: PropTypes.any
 }
 
 export default MainLayout;

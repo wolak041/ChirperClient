@@ -8,11 +8,23 @@
 }
 
 body {
-  background-color: $secondary;
   margin: 0;
   padding: 0;
+  background-color: $secondary;
 
   input {
-    color: black;
+    color: rgb(0, 0, 0);
+  }
+}
+
+@media (min-width: $md) {
+  .hideAtMd {
+    display: none;
+  }
+}
+
+@media (max-width: calc(#{$md} - 1px)) {
+  .showAtMd {
+    display: none;
   }
 }

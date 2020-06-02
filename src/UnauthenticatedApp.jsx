@@ -6,14 +6,12 @@ import { clientUrls } from './helpers/constants';
 
 const UnauthenticatedApp = () => {
   return (
-    <>
-      <Switch>
-        <Route path={clientUrls.ENTRY}>
-          <Entry />
-        </Route>
-        <Redirect to={clientUrls.ENTRY} />
-      </Switch>
-    </>
+    <Switch>
+      <Route path={clientUrls.ENTRY}>
+        <Entry />
+      </Route>
+      <Redirect to={clientUrls.ENTRY} />
+    </Switch>
   )
 }
 

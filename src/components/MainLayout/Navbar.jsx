@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
@@ -8,12 +8,7 @@ import chirpy from '../../assets/images/chirpy.svg';
 import styles from './MainLayout.module.scss';
 
 const Navbar = (props) => {
-  const [isMenuActive, toggleMenu] = useState(false);
-  const handleToggleMenu = () => {
-    toggleMenu(prevIsMenuActive => !prevIsMenuActive)
-  }
-
-  const { user } = props;
+  const { user, isSidebarActive, handleToggleMenu } = props;
 
   return (
     <nav className={styles.navbar}>
@@ -21,16 +16,23 @@ const Navbar = (props) => {
         <button
           className={styles.logo}
         >
-          <Link to={clientUrls.MAIN}>
+          <Link
+            to={clientUrls.MAIN}
+            tabIndex="-1"
+          >
             <img src={chirpy} alt="logo" />
             <p>Chirper</p>
           </Link>
         </button>
       </div>
       <div className={styles.right}>
-        <UserPanel nickname={user.nickname} userId={user.id} />
+        <UserPanel
+          nickname={user.nickname}
+          userId={user.id}
+          classes={{ root: 'showAtMd' }}
+        />
         <button
-          className={`${styles.hamburgerMenu} ${isMenuActive ? styles.isActive : ''}`}
+          className={`${styles.hamburgerMenu} ${isSidebarActive ? styles.isActive : ''}`}
           onClick={handleToggleMenu}
         >
           <div className={styles.menuBox}>
@@ -38,12 +40,19 @@ const Navbar = (props) => {
           </div>
         </button>
       </div>
-      <Sidebar />
+      <Sidebar
+        isSidebarActive={isSidebarActive}
+        nickname={user.nickname}
+        userId={user.id}
+        handleToggleMenu={handleToggleMenu}
+      />
     </nav>
   );
 }
 
 Navbar.propTypes = {
+  isSidebarActive: PropTypes.bool,
+  handleToggleMenu: PropTypes.func,
   user: PropTypes.shape({
     id: PropTypes.string,
     nickname: PropTypes.string,

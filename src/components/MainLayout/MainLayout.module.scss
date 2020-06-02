@@ -1,8 +1,40 @@
 @import '../../assets/styles/variables';
 
+$nav-height: 50px;
+$sidebar-width: 300px;
+
+.mainLayout {
+  $layout-offset: 10px;
+
+  position: relative;
+  margin-top: calc(#{$nav-height} + #{$layout-offset});
+  margin-bottom: $layout-offset;
+}
+
+.content {
+  max-width: 600px;
+  margin: 0 auto;
+  transition: padding 0.3s ease-in-out;
+
+  @media (min-width: $md) {
+    &.sidebarActive {
+      padding-right: $sidebar-width;
+    }
+  }
+
+  @media (min-width: $lg) {
+    max-width: 750px;
+  }
+}
+
 .navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 8;
   display: flex;
-  height: 50px;
+  height: $nav-height;
   background-color: $nav-bg;
 
   .right {
@@ -27,6 +59,7 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
+      outline: none;
 
       img {
         width: 40px;
@@ -42,7 +75,6 @@
         letter-spacing: 0.1em;
       }
     }
-
 
     &:hover {
       background-color: darken($transparent-bg, 20%);
@@ -85,7 +117,7 @@
       $bar-offset: 8px;
 
       top: calc(50% - (#{$bar-height} / 2));
-      transition-duration: 0.5s;
+      transition-duration: 0.2s;
 
       &,
       &::before,
@@ -100,14 +132,14 @@
       &::before {
         top: $bar-offset;
         left: 0;
-        transition: top 0.2s 0.3s ease-in;
+        transition: top 0.1s 0.1s ease-in;
         content: '';
       }
 
       &::after {
         bottom: $bar-offset;
         left: 0;
-        transition: bottom 0.2s 0.3s ease-in, transform 0.3s ease;
+        transition: bottom 0.1s 0.1s ease-in, transform 0.2s ease;
         content: '';
       }
     }
@@ -115,19 +147,19 @@
 
   &.isActive {
     .menuMiddle {
-      transform: rotate(225deg);
-      transition-delay: 0.3s;
+      transform: rotate(45deg);
+      transition-delay: 0.1s;
 
       &::before {
         top: 0;
         opacity: 0;
-        transition: top 0.2s ease-in, opacity 0.3s 0.2s ease-in;
+        transition: top 0.1s ease-in, opacity 0.2s ease-in;
       }
 
       &::after {
         bottom: 0;
         transform: rotate(-90deg);
-        transition: bottom 0.2s ease-in, transform 0.1s 0.3s ease;
+        transition: bottom 0.1s ease-in, transform 0.2s 0.1s ease;
       }
     }
   }
@@ -146,5 +178,55 @@
 
   &::-moz-focus-inner {
     border: 0;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -$sidebar-width;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: $sidebar-width;
+  margin: 0;
+  padding: 10px;
+  overflow: auto;
+  background-color: $nav-bg;
+  transition: transform 0.3s ease-in-out;
+
+  @media (min-width: $md) {
+    top: $nav-height;
+  }
+
+  &.sidebarActive {
+    transform: translateX(-$sidebar-width);
+  }
+
+  .logoutBtn {
+    margin-top: auto;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+  display: block;
+  background-color: rgb(0, 0, 0);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+
+  @media (max-width: calc(#{$md} - 1px)) {
+    &.sidebarActive {
+      opacity: 0.5;
+      pointer-events: auto;
+    }
   }
 }

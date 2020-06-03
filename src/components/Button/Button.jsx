@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styles from './Button.module.scss';
 
 const Button = (props) => {
-  const { disabled, classes, attributes, variant = 'default' } = props;
+  const { onClick, disabled, classes, attributes, variant = 'default' } = props;
   const variantClass = variant === 'outlined' ? styles.outlined : '';
 
   return (
     <button
       className={`${classes?.root} ${styles.button} ${variantClass}`}
-      onClick={props.handleClick}
+      onClick={onClick}
       disabled={disabled}
       {...attributes}
     >{props.children}</button>
@@ -17,7 +17,7 @@ const Button = (props) => {
 }
 
 Button.propTypes = {
-  handleClick: PropTypes.func,
+  onClick: PropTypes.func,
   disabled: PropTypes.bool,
   classes: PropTypes.shape({
     root: PropTypes.string

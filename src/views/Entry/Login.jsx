@@ -17,8 +17,8 @@ const Login = (props) => {
           name="email"
           label="Email"
           value={values.email}
-          handleChange={handleChange}
-          handleBlur={handleBlur}
+          onChange={handleChange}
+          onBlur={handleBlur}
         >
           <HelperText type="error">
             {touched.email && errors.email}
@@ -29,8 +29,8 @@ const Login = (props) => {
           name="password"
           label="Password"
           value={values.password}
-          handleChange={handleChange}
-          handleBlur={handleBlur}
+          onChange={handleChange}
+          onBlur={handleBlur}
         >
           <HelperText type="error">
             {touched.password && errors.password}

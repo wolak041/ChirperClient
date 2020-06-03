@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './Text.module.scss';
 
 const Input = (props) => {
-  const { type, name, label, id, value, classes, attributes } = props;
+  const { onChange, onBlur, type, name, label, id, value, classes, attributes } = props;
 
   return (
     <div className={`${classes?.root} ${styles.wrapper}`}>
@@ -18,8 +18,8 @@ const Input = (props) => {
         name={name}
         className={`${classes?.input} ${styles.input}`}
         value={value}
-        onChange={props.handleChange}
-        onBlur={props.handleBlur}
+        onChange={onChange}
+        onBlur={onBlur}
         id={id}
         {...attributes}
       />
@@ -29,8 +29,8 @@ const Input = (props) => {
 }
 
 Input.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   type: PropTypes.string.isRequired,
   name: PropTypes.string,
   label: PropTypes.string,

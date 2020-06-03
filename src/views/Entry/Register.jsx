@@ -17,8 +17,8 @@ const Register = (props) => {
           name="nickname"
           label="Nickname"
           value={values.nickname}
-          handleChange={handleChange}
-          handleBlur={handleBlur}
+          onChange={handleChange}
+          onBlur={handleBlur}
         >
           <HelperText type="error">
             {touched.nickname && errors.nickname}
@@ -29,8 +29,8 @@ const Register = (props) => {
           name="email"
           label="Email"
           value={values.email}
-          handleChange={handleChange}
-          handleBlur={handleBlur}
+          onChange={handleChange}
+          onBlur={handleBlur}
         >
           <HelperText type="error">
             {touched.email && errors.email}
@@ -41,8 +41,8 @@ const Register = (props) => {
           name="password"
           label="Password"
           value={values.password}
-          handleChange={handleChange}
-          handleBlur={handleBlur}
+          onChange={handleChange}
+          onBlur={handleBlur}
         >
           <HelperText type="error">
             {touched.password && errors.password}
@@ -53,8 +53,8 @@ const Register = (props) => {
           name="repeatPassword"
           label="Repeat password"
           value={values.repeatPassword}
-          handleChange={handleChange}
-          handleBlur={handleBlur}
+          onChange={handleChange}
+          onBlur={handleBlur}
         >
           <HelperText type="error">
             {touched.repeatPassword && errors.repeatPassword}

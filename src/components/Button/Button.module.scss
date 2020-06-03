@@ -11,18 +11,20 @@
   border-radius: 10px;
   outline: none;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
-  &:hover {
-    background-color: $primary-active;
-  }
-
+  &:hover,
   &:focus {
     background-color: $primary-active;
   }
 
   &:active {
     background-color: darken($primary-active, 5%);
+  }
+
+  &:disabled {
+    color: $disabled;
+    background-color: $disabled-bg;
   }
 
   &.outlined {
@@ -32,16 +34,19 @@
     background-color: transparent;
     border: 1px solid $primary;
 
-    &:hover {
-      background-color: $action-background;
-    }
-
+    &:hover,
     &:focus {
       background-color: $action-background;
     }
 
     &:active {
       background-color: darken($action-background, 10%);
+    }
+
+    &:disabled {
+      color: $disabled;
+      background-color: transparent;
+      border-color: $disabled-bg;
     }
   }
 

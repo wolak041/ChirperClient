@@ -1,3 +1,3 @@
-import { getUser, loginUser, registerUser, isNicknameAvailable, isEmailAvailable } from './user';
+import { getUser, loginUser, registerUser, logoutUser, isNicknameAvailable, isEmailAvailable } from './user';
 
-export { getUser, loginUser, registerUser, isNicknameAvailable, isEmailAvailable };
+export { getUser, loginUser, registerUser, logoutUser, isNicknameAvailable, isEmailAvailable };

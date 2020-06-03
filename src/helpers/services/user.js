@@ -24,6 +24,9 @@ export const loginUser = async (credentials) =>
 export const registerUser = async (credentials) =>
   handleRequest(await fetch(apiUrls.REGISTER, entryOptions(credentials)));
 
+export const logoutUser = async () =>
+  handleRequest(await fetch(apiUrls.LOGOUT, { method: 'POST' }));
+
 const checkAvailability = async (url, body) =>
   (
     await handleRequest(

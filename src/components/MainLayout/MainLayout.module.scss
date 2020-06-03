@@ -76,10 +76,7 @@ $sidebar-width: 300px;
       }
     }
 
-    &:hover {
-      background-color: darken($transparent-bg, 20%);
-    }
-
+    &:hover,
     &:focus {
       background-color: darken($transparent-bg, 20%);
     }
@@ -164,10 +161,7 @@ $sidebar-width: 300px;
     }
   }
 
-  &:hover {
-    background-color: darken($transparent-bg, 20%);
-  }
-
+  &:hover,
   &:focus {
     background-color: darken($transparent-bg, 20%);
   }

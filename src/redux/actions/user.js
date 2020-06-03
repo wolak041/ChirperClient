@@ -27,3 +27,10 @@ export const saveUser = (user) => async (dispatch) => {
     payload: { user },
   });
 };
+
+export const deleteUser = () => async (dispatch) => {
+  dispatch({
+    type: USER_ERROR,
+    payload: { error: 'Logout' },
+  });
+};

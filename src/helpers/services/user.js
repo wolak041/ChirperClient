@@ -1,15 +1,5 @@
 import { apiUrls } from '../constants';
 
-const getUser = async () => {
-  const request = await fetch(apiUrls.GET_USER, {
-    method: 'POST',
-  });
-  const response = await request.json();
-
-  if (request.ok) return response;
-  else throw new Error(response.error);
-};
-
 const entryOptions = (body) => ({
   method: 'POST',
   credentials: 'same-origin',
@@ -26,10 +16,12 @@ const handleRequest = async (request) => {
   else throw new Error(response.error);
 };
 
-const loginUser = async (credentials) =>
+export const getUser = async () => handleRequest(await fetch(apiUrls.GET_USER, { method: 'POST' }));
+
+export const loginUser = async (credentials) =>
   handleRequest(await fetch(apiUrls.LOGIN, entryOptions(credentials)));
 
-const registerUser = async (credentials) =>
+export const registerUser = async (credentials) =>
   handleRequest(await fetch(apiUrls.REGISTER, entryOptions(credentials)));
 
 const checkAvailability = async (url, body) =>
@@ -45,9 +37,8 @@ const checkAvailability = async (url, body) =>
     )
   ).isAvailable;
 
-const isNicknameAvailable = async (nickname) =>
+export const isNicknameAvailable = async (nickname) =>
   checkAvailability(apiUrls.NICKNAME_AVAILABILITY, { nickname });
 
-const isEmailAvailable = async (email) => checkAvailability(apiUrls.EMAIL_AVAILABILITY, { email });
-
-export { getUser, loginUser, registerUser, isNicknameAvailable, isEmailAvailable };
+export const isEmailAvailable = async (email) =>
+  checkAvailability(apiUrls.EMAIL_AVAILABILITY, { email });

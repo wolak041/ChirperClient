@@ -18,7 +18,7 @@ const Entry = () => {
   };
 
   const dispatch = useDispatch();
-  const saveUserDispatch = useCallback(() => dispatch(saveUser()), [dispatch]);
+  const saveUserDispatch = useCallback(user => dispatch(saveUser(user)), [dispatch]);
 
   const history = useHistory();
 

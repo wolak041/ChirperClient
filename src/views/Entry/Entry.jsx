@@ -104,10 +104,12 @@ const Entry = () => {
       if (isPrevModeLogin) {
         loginFormik.setErrors({});
         loginFormik.setStatus({});
+        loginFormik.setTouched({});
 
       } else {
         registerFormik.setErrors({});
         registerFormik.setStatus({});
+        registerFormik.setTouched({});
       }
 
       return isPrevModeLogin ? MODES.REGISTER : MODES.LOGIN
@@ -122,7 +124,6 @@ const Entry = () => {
       </div>
       <div className={styles.formWrapper}>
         <div className={styles.formSwitch}>
-          <label htmlFor="login">Login</label>
           <input
             type="radio"
             name="mode"
@@ -130,7 +131,7 @@ const Entry = () => {
             checked={mode === MODES.LOGIN}
             onChange={handleModeToggle}
           />
-          <label htmlFor="register">Register</label>
+          <label htmlFor="login">Login</label>
           <input
             type="radio"
             name="mode"
@@ -138,6 +139,7 @@ const Entry = () => {
             checked={mode === MODES.REGISTER}
             onChange={handleModeToggle}
           />
+          <label htmlFor="register">Register</label>
         </div>
         {mode === MODES.LOGIN
           ? <Login

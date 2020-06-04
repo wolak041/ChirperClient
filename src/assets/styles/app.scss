@@ -11,10 +11,6 @@ body {
   margin: 0;
   padding: 0;
   background-color: $secondary;
-
-  input {
-    color: rgb(0, 0, 0);
-  }
 }
 
 @media (min-width: $md) {

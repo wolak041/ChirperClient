@@ -1,0 +1,111 @@
+@import '../../assets/styles/variables';
+
+$border-radius: 6px;
+$focus-bg: darken($transparent-bg, 5%);
+
+.root {
+  position: relative;
+  margin-bottom: 28px;
+
+  .helper {
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 0;
+    left: 0;
+    margin: 0 3px;
+  }
+}
+
+.fieldWrapper {
+  position: relative;
+  min-height: 40px;
+  background-color: darken($transparent-bg, 15%);
+  border-radius: $border-radius;
+  transition: background-color 0.2s ease;
+
+  .input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px 10px 8px;
+    color: $text;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+
+    &:-webkit-autofill,
+    :-webkit-autofill:hover,
+    :-webkit-autofill:focus {
+      border-radius: $border-radius;
+      box-shadow: 0 0 0 1000px rgba(0, 45, 128, 0.6) inset;
+      -webkit-text-fill-color: $text;
+    }
+
+    &::-moz-focus-inner {
+      border: 0;
+    }
+  }
+
+  .label {
+    $active-transform: translate(14px, 3px) scale(0.7);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    color: $text;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    transform: translate(12px, 14px) scale(1);
+    transform-origin: top left;
+    transition: transform 0.3s ease, color 0.3s ease;
+    pointer-events: none;
+
+    &.filled {
+      color: darken($text, 5%);
+      transform: $active-transform;
+    }
+
+    &.active {
+      color: $primary;
+      transform: $active-transform;
+    }
+  }
+
+  &::before,
+  &::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 10px;
+    border-radius: $border-radius;
+    content: '';
+    pointer-events: none;
+  }
+
+  &::before {
+    border-bottom: 1px solid transparentize($text, 0.4);
+  }
+
+  &::after {
+    border-bottom: 2px solid $primary;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &.active {
+    background-color: $focus-bg;
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &:hover {
+    background-color: $focus-bg;
+  }
+}

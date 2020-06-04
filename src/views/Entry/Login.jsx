@@ -41,8 +41,10 @@ const Login = (props) => {
           disabled={isSubmitting}
         >Sign in</Button>
       </form>
-      {errors?.formError && <HelperText type="error">{errors.formError}</HelperText>}
-      {status?.formInfo && <HelperText type="success">{status.formInfo}</HelperText>}
+      <div className={styles.helper}>
+        {errors?.formError && <HelperText type="error">{errors.formError}</HelperText>}
+        {status?.formInfo && <HelperText type="success">{status.formInfo}</HelperText>}
+      </div>
     </>
   );
 }

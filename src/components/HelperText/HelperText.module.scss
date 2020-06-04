@@ -1,13 +1,30 @@
+@import '../../assets/styles/variables';
+
 .helperText {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  color: $text;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  border-radius: 5px;
+
+  img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
+
   &.info {
-    color: yellow;
+    background-color: $information;
   }
 
   &.success {
-    color: green;
+    background-color: $success;
   }
 
   &.error {
-    color: red;
+    background-color: $error;
   }
 }

@@ -1,7 +1,7 @@
-import { USER_PENDING, USER_SUCCESS, USER_ERROR } from './actionTypes';
+import { USER_PENDING, USER_SUCCESS, USER_LOGOUT } from './actionTypes';
 import { getUser } from '../../helpers/services';
 
-export const fetchUser = () => async (dispatch) => {
+export const fetchUser = () => async dispatch => {
   dispatch({
     type: USER_PENDING,
   });
@@ -15,22 +15,20 @@ export const fetchUser = () => async (dispatch) => {
     });
   } catch (error) {
     dispatch({
-      type: USER_ERROR,
-      payload: { error },
+      type: USER_LOGOUT,
     });
   }
 };
 
-export const saveUser = (user) => async (dispatch) => {
+export const saveUser = user => async dispatch => {
   dispatch({
     type: USER_SUCCESS,
     payload: { user },
   });
 };
 
-export const deleteUser = () => async (dispatch) => {
+export const userLogout = () => async dispatch => {
   dispatch({
-    type: USER_ERROR,
-    payload: { error: 'Logout' },
+    type: USER_LOGOUT,
   });
 };

@@ -1,29 +1,35 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
-import loadable from '@loadable/component'
-import { useSelector, useDispatch } from "react-redux";
+import { BrowserRouter as Router } from 'react-router-dom';
+import loadable from '@loadable/component';
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchUser } from './redux/actions/user';
 import { getUserState } from './redux/selectors';
 import { statusIndicators } from './helpers/constants';
 import { Loading } from './components';
 import './assets/styles/app.scss';
 
-const AuthenticatedApp = loadable(() => import(/* webpackChunkName: "auth-app" */ './AuthenticatedApp'), {
-  fallback: <Loading />
-});
+const AuthenticatedApp = loadable(
+  () => import(/* webpackChunkName: "auth-app" */ './AuthenticatedApp'),
+  {
+    fallback: <Loading />,
+  },
+);
 
-const UnauthenticatedApp = loadable(() => import(/* webpackChunkName: "unauth-app" */ './UnauthenticatedApp'), {
-  fallback: <Loading />
-});
+const UnauthenticatedApp = loadable(
+  () => import(/* webpackChunkName: "unauth-app" */ './UnauthenticatedApp'),
+  {
+    fallback: <Loading />,
+  },
+);
 
-const displayApp = (status) => {
+const displayApp = status => {
   switch (status) {
     case statusIndicators.PENDING:
-      return <Loading />
+      return <Loading />;
     case statusIndicators.SUCCESS:
-      return <AuthenticatedApp />
-    case statusIndicators.ERROR:
-      return <UnauthenticatedApp />
+      return <AuthenticatedApp />;
+    case statusIndicators.LOGOUT:
+      return <UnauthenticatedApp />;
   }
 };
 
@@ -31,15 +37,12 @@ const App = () => {
   const { status } = useSelector(state => getUserState(state));
 
   const dispatch = useDispatch();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { dispatch(fetchUser()) }, []);
+  useEffect(() => {
+    dispatch(fetchUser());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return (
-    <Router>
-      {displayApp(status)}
-    </Router>
-  );
-
-}
+  return <Router>{displayApp(status)}</Router>;
+};
 
 export default App;

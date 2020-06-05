@@ -13,5 +13,5 @@ export const clientUrls = {
   MAIN: '/',
   ENTRY: '/entry',
   USER: '/user',
-  ACCOUNT: '/account'
-}
+  ACCOUNT: '/account',
+};

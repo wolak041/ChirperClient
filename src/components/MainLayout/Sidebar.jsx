@@ -1,31 +1,32 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from "react-redux";
-import { useHistory } from 'react-router-dom';
-import { deleteUser } from '../../redux/actions/user';
+import { useDispatch } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
+import { userLogout } from '../../redux/actions/user';
 import { UserPanel, Button } from '../';
 import { logoutUser } from '../../helpers/services';
 import { clientUrls } from '../../helpers/constants';
 import styles from './MainLayout.module.scss';
 
-const Sidebar = (props) => {
+const Sidebar = props => {
   const dispatch = useDispatch();
-  const deleteUserDispatch = useCallback(() => dispatch(deleteUser()), [dispatch]);
+  const userLogoutDispatch = useCallback(() => dispatch(userLogout()), [
+    dispatch,
+  ]);
 
   const history = useHistory();
   const handleLogout = async () => {
     try {
       const response = await logoutUser();
       console.log(response);
-      deleteUserDispatch()
+      userLogoutDispatch();
       history.replace(clientUrls.MAIN);
-
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
-  const toggleActiveClass = props.isSidebarActive ? styles.sidebarActive : ''
+  const toggleActiveClass = props.isSidebarActive ? styles.sidebarActive : '';
 
   return (
     <>
@@ -35,10 +36,16 @@ const Sidebar = (props) => {
           userId={props.userId}
           classes={{ root: `hideAtMd ${styles.sidebarUser}` }}
         />
-        <Button
-          onClick={handleLogout}
-          classes={{ root: styles.logoutBtn }}
-        >Logout</Button>
+        <Link
+          className={styles.manageAccount}
+          to={clientUrls.ACCOUNT}
+          tabIndex="-1"
+        >
+          <Button variant="outlined">Manage account</Button>
+        </Link>
+        <Button onClick={handleLogout} classes={{ root: styles.logoutBtn }}>
+          Logout
+        </Button>
       </div>
       <div
         className={`${styles.overlay} ${toggleActiveClass}`}
@@ -46,13 +53,13 @@ const Sidebar = (props) => {
       />
     </>
   );
-}
+};
 
 Sidebar.propTypes = {
   nickname: PropTypes.string,
   userId: PropTypes.string,
   isSidebarActive: PropTypes.bool,
   handleToggleMenu: PropTypes.func,
-}
+};
 
 export default Sidebar;

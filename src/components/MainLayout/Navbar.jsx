@@ -7,23 +7,18 @@ import { UserPanel } from '../';
 import chirpy from '../../assets/images/chirpy.svg';
 import styles from './MainLayout.module.scss';
 
-const Navbar = (props) => {
+const Navbar = props => {
   const { user, isSidebarActive, handleToggleMenu } = props;
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.left}>
-        <button
-          className={styles.logo}
-        >
-          <Link
-            to={clientUrls.MAIN}
-            tabIndex="-1"
-          >
+        <Link to={clientUrls.MAIN} tabIndex="-1" className={styles.logo}>
+          <button>
             <img src={chirpy} alt="logo" />
             <p>Chirper</p>
-          </Link>
-        </button>
+          </button>
+        </Link>
       </div>
       <div className={styles.right}>
         <UserPanel
@@ -32,7 +27,9 @@ const Navbar = (props) => {
           classes={{ root: 'showAtMd' }}
         />
         <button
-          className={`${styles.hamburgerMenu} ${isSidebarActive ? styles.isActive : ''}`}
+          className={`${styles.hamburgerMenu} ${
+            isSidebarActive ? styles.isActive : ''
+          }`}
           onClick={handleToggleMenu}
         >
           <div className={styles.menuBox}>
@@ -48,7 +45,7 @@ const Navbar = (props) => {
       />
     </nav>
   );
-}
+};
 
 Navbar.propTypes = {
   isSidebarActive: PropTypes.bool,
@@ -56,8 +53,8 @@ Navbar.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.string,
     nickname: PropTypes.string,
-    email: PropTypes.string
-  })
-}
+    email: PropTypes.string,
+  }),
+};
 
 export default Navbar;

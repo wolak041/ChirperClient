@@ -2,18 +2,20 @@
 
 .userPanel {
   margin: 3px 7px;
-  padding: 2px 7px;
-  background-color: transparent;
-  border: 0;
+  padding: 0;
+  text-decoration: none;
   border-radius: 4px;
   outline: none;
   cursor: pointer;
   transition: background-color 0.2s ease;
 
-  a {
+  button {
+    display: block;
     display: flex;
     align-items: center;
-    text-decoration: none;
+    padding: 2px 7px;
+    background-color: transparent;
+    border: 0;
     outline: none;
 
     img {

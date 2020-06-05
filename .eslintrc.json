@@ -22,6 +22,7 @@
     "react-hooks"
   ],
   "rules": {
+    "quotes": [2, "single"],
     "no-useless-escape": "off",
     "no-case-declarations": "off",
     "react/prop-types": [

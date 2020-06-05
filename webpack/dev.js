@@ -3,24 +3,25 @@ const common = require('./common.js');
 const webpack = require('webpack');
 const path = require('path');
 
-module.exports = (env) => {
+module.exports = env => {
   return merge(common(env), {
     mode: 'development',
     devtool: 'eval',
     devServer: {
+      host: '0.0.0.0',
       contentBase: path.join(__dirname, '/public'),
       watchContentBase: true,
+      open: true,
+      useLocalIp: true,
       compress: true,
       stats: 'minimal',
       hot: true,
       historyApiFallback: true,
       proxy: {
-        '/api': 'http://localhost:3000/'
-      }
+        '/api': 'http://localhost:3000/',
+      },
     },
-    plugins: [
-      new webpack.NamedModulesPlugin(),
-    ],
+    plugins: [new webpack.NamedModulesPlugin()],
     module: {
       rules: [
         {
@@ -31,4 +32,4 @@ module.exports = (env) => {
       ],
     },
   });
-}
+};

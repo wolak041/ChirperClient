@@ -8,7 +8,7 @@ import chirpy from '../../assets/images/chirpy.svg';
 import styles from './MainLayout.module.scss';
 
 const Navbar = props => {
-  const { user, isSidebarActive, handleToggleMenu } = props;
+  const { user, isSidebarActive, handleOpenMenu, handleCloseMenu } = props;
 
   return (
     <nav className={styles.navbar}>
@@ -30,7 +30,7 @@ const Navbar = props => {
           className={`${styles.hamburgerMenu} ${
             isSidebarActive ? styles.isActive : ''
           }`}
-          onClick={handleToggleMenu}
+          onClick={handleOpenMenu}
         >
           <div className={styles.menuBox}>
             <div className={styles.menuMiddle} />
@@ -41,7 +41,7 @@ const Navbar = props => {
         isSidebarActive={isSidebarActive}
         nickname={user.nickname}
         userId={user.id}
-        handleToggleMenu={handleToggleMenu}
+        handleCloseMenu={handleCloseMenu}
       />
     </nav>
   );
@@ -49,7 +49,8 @@ const Navbar = props => {
 
 Navbar.propTypes = {
   isSidebarActive: PropTypes.bool,
-  handleToggleMenu: PropTypes.func,
+  handleOpenMenu: PropTypes.func,
+  handleCloseMenu: PropTypes.func,
   user: PropTypes.shape({
     id: PropTypes.string,
     nickname: PropTypes.string,

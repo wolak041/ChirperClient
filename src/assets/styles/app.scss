@@ -15,12 +15,12 @@ body {
 
 @media (min-width: $md) {
   .hideAtMd {
-    display: none;
+    display: none !important;
   }
 }
 
 @media (max-width: calc(#{$md} - 1px)) {
   .showAtMd {
-    display: none;
+    display: none !important;
   }
 }

@@ -1,7 +1,13 @@
-import { SIDEBAR_TOGGLE } from './actionTypes';
+import { SIDEBAR_OPEN, SIDEBAR_CLOSE } from './actionTypes';
 
-export const toggleSidebar = () => dispatch => {
+export const openSidebar = () => dispatch => {
   dispatch({
-    type: SIDEBAR_TOGGLE,
+    type: SIDEBAR_OPEN,
+  });
+};
+
+export const closeSidebar = () => dispatch => {
+  dispatch({
+    type: SIDEBAR_CLOSE,
   });
 };

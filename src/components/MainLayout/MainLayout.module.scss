@@ -49,10 +49,8 @@ $sidebar-width: 300px;
     margin: 3px 7px;
     padding: 2px 7px;
     text-decoration: none;
-    border-radius: 4px;
     outline: none;
     cursor: pointer;
-    transition: background-color 0.2s ease;
 
     button {
       display: flex;
@@ -60,7 +58,9 @@ $sidebar-width: 300px;
       justify-content: center;
       background-color: transparent;
       border: 0;
+      border-radius: 4px;
       outline: none;
+      transition: background-color 0.2s ease;
 
       img {
         width: 40px;
@@ -75,19 +75,19 @@ $sidebar-width: 300px;
         font-size: 28px;
         letter-spacing: 0.1em;
       }
-    }
 
-    &:hover,
-    &:focus {
-      background-color: darken($transparent-bg, 20%);
-    }
+      &:hover,
+      &:focus {
+        background-color: darken($transparent-bg, 20%);
+      }
 
-    &:active {
-      background-color: darken($transparent-bg, 30%);
-    }
+      &:active {
+        background-color: darken($transparent-bg, 30%);
+      }
 
-    &::-moz-focus-inner {
-      border: 0;
+      &::-moz-focus-inner {
+        border: 0;
+      }
     }
   }
 }
@@ -196,14 +196,21 @@ $sidebar-width: 300px;
     top: $nav-height;
   }
 
-  .sidebarUser {
-    margin-bottom: 20px;
-  }
-
-  .manageAccount {
+  .elementWrapper {
+    display: flex;
     margin: 5px 7px;
 
-    button {
+    > * {
+      flex: 1;
+      margin: 0;
+      outline: none;
+    }
+
+    &.sidebarUser {
+      margin-bottom: 20px;
+    }
+
+    &.manageAccount button {
       width: 100%;
     }
   }

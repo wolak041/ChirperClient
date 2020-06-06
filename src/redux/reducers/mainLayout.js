@@ -1,4 +1,4 @@
-import { SIDEBAR_TOGGLE } from '../actions/actionTypes';
+import { SIDEBAR_OPEN, SIDEBAR_CLOSE } from '../actions/actionTypes';
 
 const initialState = {
   isSidebarActive: false,
@@ -6,10 +6,16 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SIDEBAR_TOGGLE: {
+    case SIDEBAR_OPEN: {
       return {
         ...state,
-        isSidebarActive: !state.isSidebarActive,
+        isSidebarActive: true,
+      };
+    }
+    case SIDEBAR_CLOSE: {
+      return {
+        ...state,
+        isSidebarActive: false,
       };
     }
     default:

@@ -4,3 +4,7 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 
 export const SIDEBAR_OPEN = 'SIDEBAR_OPEN';
 export const SIDEBAR_CLOSE = 'SIDEBAR_CLOSE';
+
+export const MAIN_FEED_PENDING = 'MAIN_FEED_PENDING';
+export const MAIN_FEED_SUCCESS = 'MAIN_FEED_SUCCESS';
+export const MAIN_FEED_ERROR = 'MAIN_FEED_ERROR';

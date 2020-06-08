@@ -4,5 +4,6 @@ import Button from './Button/Button';
 import HelperText from './HelperText/HelperText';
 import MainLayout from './MainLayout/MainLayout';
 import UserPanel from './UserPanel/UserPanel';
+import Post from './Post/Post';
 
-export { Loading, Text, Button, HelperText, MainLayout, UserPanel };
+export { Loading, Text, Button, HelperText, MainLayout, UserPanel, Post };

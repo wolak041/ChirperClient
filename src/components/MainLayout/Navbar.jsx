@@ -1,20 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Sidebar from './Sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { clientUrls } from '../../helpers/constants';
 import { UserPanel } from '../';
+import Sidebar from './Sidebar';
 import chirpy from '../../assets/images/chirpy.svg';
 import styles from './MainLayout.module.scss';
 
 const Navbar = props => {
-  const { user, isSidebarActive, handleOpenMenu, handleCloseMenu } = props;
+  const {
+    user,
+    isSidebarActive,
+    handleOpenMenu,
+    handleCloseMenu,
+    handleLogout,
+    refreshMainFeed,
+  } = props;
+
+  const location = useLocation();
+  const handleLogoClick = () => {
+    location.pathname === clientUrls.MAIN && refreshMainFeed();
+  };
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.left}>
         <Link to={clientUrls.MAIN} tabIndex="-1" className={styles.logo}>
-          <button>
+          <button onClick={handleLogoClick}>
             <img src={chirpy} alt="logo" />
             <p>Chirper</p>
           </button>
@@ -42,6 +54,7 @@ const Navbar = props => {
         nickname={user.nickname}
         userId={user.id}
         handleCloseMenu={handleCloseMenu}
+        handleLogout={handleLogout}
       />
     </nav>
   );
@@ -51,6 +64,8 @@ Navbar.propTypes = {
   isSidebarActive: PropTypes.bool,
   handleOpenMenu: PropTypes.func,
   handleCloseMenu: PropTypes.func,
+  handleLogout: PropTypes.func,
+  refreshMainFeed: PropTypes.func,
   user: PropTypes.shape({
     id: PropTypes.string,
     nickname: PropTypes.string,

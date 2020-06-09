@@ -1,33 +1,19 @@
-import React, { useCallback, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
-import { userLogout } from '../../redux/actions/user';
+import { Link } from 'react-router-dom';
 import { UserPanel, Button } from '../';
 import ElementWrapper from './ElementWrapper';
-import { logoutUser } from '../../helpers/services';
 import { clientUrls } from '../../helpers/constants';
 import styles from './MainLayout.module.scss';
 
 const Sidebar = props => {
-  const { handleCloseMenu, isSidebarActive, nickname, userId } = props;
-
-  const dispatch = useDispatch();
-  const userLogoutDispatch = useCallback(() => dispatch(userLogout()), [
-    dispatch,
-  ]);
-
-  const history = useHistory();
-  const handleLogout = async () => {
-    try {
-      const response = await logoutUser();
-      console.log(response);
-      userLogoutDispatch();
-      history.replace(clientUrls.MAIN);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const {
+    handleLogout,
+    handleCloseMenu,
+    isSidebarActive,
+    nickname,
+    userId,
+  } = props;
 
   const sidebarRef = useRef();
   const handleOutsideClick = event => {
@@ -86,6 +72,7 @@ Sidebar.propTypes = {
   userId: PropTypes.string,
   isSidebarActive: PropTypes.bool,
   handleCloseMenu: PropTypes.func,
+  handleLogout: PropTypes.func,
 };
 
 export default Sidebar;

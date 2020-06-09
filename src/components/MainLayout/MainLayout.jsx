@@ -1,9 +1,14 @@
 import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { openSidebar, closeSidebar } from '../../redux/actions/mainLayout';
+import { userLogout } from '../../redux/actions/user';
 import { getUserState, getMainLayoutState } from '../../redux/selectors';
+import { logoutUser } from '../../helpers/services';
+import { clientUrls, feed } from '../../helpers/constants';
 import Navbar from './Navbar';
 import styles from './MainLayout.module.scss';
+import { fetchMainFeed, setMainFeedInitialState } from '../../redux/actions/mainFeed';
 
 const MainLayout = props => {
   const { user } = useSelector(state => getUserState(state));
@@ -17,6 +22,27 @@ const MainLayout = props => {
     dispatch,
   ]);
 
+  const userLogoutDispatch = useCallback(() => dispatch(userLogout()), [
+    dispatch,
+  ]);
+
+  const refreshMainFeed = useCallback(() => {
+    dispatch(setMainFeedInitialState());
+    dispatch(fetchMainFeed(new Date().toISOString(), feed.FETCH_POSTS_LIMIT, []));
+  }, [dispatch]);
+
+  const history = useHistory();
+  const handleLogout = async () => {
+    try {
+      const response = await logoutUser();
+      console.log(response);
+      userLogoutDispatch();
+      history.replace(clientUrls.MAIN);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className={styles.mainLayout}>
       <Navbar
@@ -24,6 +50,8 @@ const MainLayout = props => {
         isSidebarActive={isSidebarActive}
         handleOpenMenu={openSidebarDispatch}
         handleCloseMenu={closeSidebarDispatch}
+        handleLogout={handleLogout}
+        refreshMainFeed={refreshMainFeed}
       />
       <div
         className={`${styles.content} ${

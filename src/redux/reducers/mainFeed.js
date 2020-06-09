@@ -2,6 +2,7 @@ import {
   MAIN_FEED_PENDING,
   MAIN_FEED_SUCCESS,
   // MAIN_FEED_ERROR,
+  MAIN_FEED_INITIAL_STATE,
 } from '../actions/actionTypes';
 import { statusIndicators, feed } from '../../helpers/constants';
 import { extractPostIds } from '../../helpers/services';
@@ -47,6 +48,9 @@ export default (state = initialState, action) => {
     //     user: null,
     //   };
     // }
+    case MAIN_FEED_INITIAL_STATE: {
+      return { ...initialState };
+    }
     default:
       return state;
   }

@@ -1,8 +1,8 @@
 import {
   MAIN_FEED_PENDING,
-  MAIN_FEED_SUCCESS,
-  // MAIN_FEED_ERROR,
-  MAIN_FEED_INITIAL_STATE,
+  MAIN_FEED_PART,
+  MAIN_FEED_ERROR,
+  MAIN_FEED_REFRESH,
 } from '../actions/actionTypes';
 import { statusIndicators, feed } from '../../helpers/constants';
 import { extractPostIds } from '../../helpers/services';
@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
         status: statusIndicators.PENDING,
       };
     }
-    case MAIN_FEED_SUCCESS: {
+    case MAIN_FEED_PART: {
       const { mainFeed } = action.payload;
 
       const updatedMainFeed = [...state.mainFeed, ...mainFeed];
@@ -41,15 +41,25 @@ export default (state = initialState, action) => {
         lastPostsIds,
       };
     }
-    // case MAIN_FEED_ERROR: {
-    //   return {
-    //     ...state,
-    //     status: statusIndicators.LOGOUT,
-    //     user: null,
-    //   };
-    // }
-    case MAIN_FEED_INITIAL_STATE: {
-      return { ...initialState };
+    case MAIN_FEED_ERROR: {
+      return {
+        ...state,
+        status: statusIndicators.ERROR,
+      };
+    }
+    case MAIN_FEED_REFRESH: {
+      const { mainFeed } = action.payload;
+
+      const lastPostDate = mainFeed.slice(-1)[0].date;
+      const lastPostsIds = extractPostIds(mainFeed);
+
+      return {
+        ...state,
+        status: statusIndicators.SUCCESS,
+        mainFeed,
+        lastPostDate,
+        lastPostsIds,
+      };
     }
     default:
       return state;

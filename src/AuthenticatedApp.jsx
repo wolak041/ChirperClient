@@ -1,11 +1,19 @@
 import { hot } from 'react-hot-loader/root';
-import React from 'react';
-import { Switch, Route, Redirect } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { refreshMainFeed } from './redux/actions/mainFeed';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { MainFeed, UserFeed, ManageAccount } from './views';
 import { MainLayout } from './components';
 import { clientUrls } from './helpers/constants';
 
 const AuthenticatedApp = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(refreshMainFeed());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <MainLayout>
       <Switch>
@@ -24,7 +32,7 @@ const AuthenticatedApp = () => {
         </Route>
       </Switch>
     </MainLayout>
-  )
-}
+  );
+};
 
 export default hot(AuthenticatedApp);

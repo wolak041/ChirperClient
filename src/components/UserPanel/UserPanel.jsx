@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { clientUrls } from '../../helpers/constants';
+import { Button } from '../';
 import userDefault from '../../assets/images/user-default.svg';
 import styles from './UserPanel.module.scss';
 
@@ -14,14 +15,14 @@ const UserPanel = props => {
       tabIndex="-1"
       className={`${styles.userPanel} ${classes?.root}`}
     >
-      <button>
+      <Button variant="link" classes={{ root: classes?.button }}>
         <img
           src={img ? img : userDefault}
           alt="user"
           className={classes?.img}
         />
         <p className={classes?.p}>{nickname}</p>
-      </button>
+      </Button>
     </Link>
   );
 };
@@ -32,6 +33,7 @@ UserPanel.propTypes = {
   userId: PropTypes.string,
   classes: PropTypes.shape({
     root: PropTypes.string,
+    button: PropTypes.string,
     img: PropTypes.string,
     p: PropTypes.string,
   }),

@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchMainFeed } from '../../redux/actions/mainFeed';
 import { getMainFeedState } from '../../redux/selectors';
 import { Post } from '../../components';
 import { statusIndicators, feed } from '../../helpers/constants';
+import { debounce } from 'throttle-debounce';
 // import styles from './MainFeed.module.scss';
 
 const MainFeed = () => {
@@ -10,30 +12,36 @@ const MainFeed = () => {
     getMainFeedState(state),
   );
 
-  const handleScroll = () => {
-    console.log(1);
-
-    // dispatch(fetchMainFeed(lastPostDate, feed.FETCH_POSTS_LIMIT, lastPostsIds));
-  };
+  const dispatch = useDispatch();
+  const debounceFetch = debounce(400, false, () => {
+    dispatch(fetchMainFeed(lastPostDate, feed.FETCH_POSTS_LIMIT, lastPostsIds));
+  });
 
   useEffect(() => {
+    const handleScroll = () => {
+      const getScrollPosition =
+        window.innerHeight + document.documentElement.scrollTop;
+      const fetchStartPoint = document.documentElement.offsetHeight * 0.8;
+      const isFetching = status !== statusIndicators.PENDING;
+
+      getScrollPosition >= fetchStartPoint && isFetching && debounceFetch();
+    };
+
     document.addEventListener('scroll', handleScroll);
 
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
-  });
+  }, [status, debounceFetch]);
 
   return (
-    <div style={{ minHeight: '2000px' }}>
+    <div>
       {mainFeed.map(post => (
         <Post date={post.date} user={post.user} key={post._id}>
           {post.content}
         </Post>
       ))}
-      {status === statusIndicators.PENDING && (
-        <div>Loading...</div>
-      )}
+      {status === statusIndicators.PENDING && <div>Loading...</div>}
     </div>
   );
 };

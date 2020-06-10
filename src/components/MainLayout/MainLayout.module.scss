@@ -4,7 +4,7 @@ $nav-height: 50px;
 $sidebar-width: 300px;
 
 .mainLayout {
-  $layout-offset: 10px;
+  $layout-offset: 20px;
 
   position: relative;
   margin-top: calc(#{$nav-height} + #{$layout-offset});
@@ -28,6 +28,8 @@ $sidebar-width: 300px;
 }
 
 .navbar {
+  $buttons-margin: 3px 7px;
+
   position: fixed;
   top: 0;
   right: 0;
@@ -46,22 +48,12 @@ $sidebar-width: 300px;
 
   .logo {
     display: block;
-    margin: 3px 7px;
-    padding: 2px 7px;
+    margin: $buttons-margin;
     text-decoration: none;
     outline: none;
     cursor: pointer;
 
     button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: transparent;
-      border: 0;
-      border-radius: 4px;
-      outline: none;
-      transition: background-color 0.2s ease;
-
       img {
         width: 40px;
         height: 40px;
@@ -75,104 +67,78 @@ $sidebar-width: 300px;
         font-size: 28px;
         letter-spacing: 0.1em;
       }
-
-      &:hover,
-      &:focus {
-        background-color: darken($transparent-bg, 20%);
-      }
-
-      &:active {
-        background-color: darken($transparent-bg, 30%);
-      }
-
-      &::-moz-focus-inner {
-        border: 0;
-      }
-    }
-  }
-}
-
-.hamburgerMenu {
-  box-sizing: content-box;
-  width: 26px;
-  height: 26px;
-  margin: 3px 7px;
-  padding: 9px;
-  background-color: transparent;
-  border: 0;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
-  .menuBox {
-    position: relative;
-    width: 100%;
-    height: 100%;
-
-    .menuMiddle {
-      $bar-height: 2px;
-      $bar-offset: 8px;
-
-      top: calc(50% - (#{$bar-height} / 2));
-      transition-duration: 0.2s;
-
-      &,
-      &::before,
-      &::after {
-        position: absolute;
-        width: 100%;
-        height: $bar-height;
-        background-color: $primary;
-        border-radius: 1px;
-      }
-
-      &::before {
-        top: $bar-offset;
-        left: 0;
-        transition: top 0.1s 0.1s ease-in;
-        content: '';
-      }
-
-      &::after {
-        bottom: $bar-offset;
-        left: 0;
-        transition: bottom 0.1s 0.1s ease-in, transform 0.2s ease;
-        content: '';
-      }
     }
   }
 
-  &.isActive {
-    .menuMiddle {
-      transform: rotate(45deg);
-      transition-delay: 0.1s;
-
-      &::before {
-        top: 0;
-        opacity: 0;
-        transition: top 0.1s ease-in, opacity 0.2s ease-in;
-      }
-
-      &::after {
-        bottom: 0;
-        transform: rotate(-90deg);
-        transition: bottom 0.1s ease-in, transform 0.2s 0.1s ease;
-      }
-    }
-  }
-
-  &:hover,
-  &:focus {
-    background-color: darken($transparent-bg, 20%);
-  }
-
-  &:active {
-    background-color: darken($transparent-bg, 30%);
-  }
-
-  &::-moz-focus-inner {
+  .hamburgerMenu {
+    box-sizing: content-box;
+    width: 26px;
+    height: 26px;
+    margin: $buttons-margin;
+    padding: 9px;
+    background-color: transparent;
     border: 0;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    .menuBox {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      .menuMiddle {
+        $bar-height: 2px;
+        $bar-offset: 8px;
+
+        top: calc(50% - (#{$bar-height} / 2));
+        transition-duration: 0.2s;
+
+        &,
+        &::before,
+        &::after {
+          position: absolute;
+          width: 100%;
+          height: $bar-height;
+          background-color: $primary;
+          border-radius: 1px;
+        }
+
+        &::before {
+          top: $bar-offset;
+          left: 0;
+          transition: top 0.1s 0.1s ease-in;
+          content: '';
+        }
+
+        &::after {
+          bottom: $bar-offset;
+          left: 0;
+          transition: bottom 0.1s 0.1s ease-in, transform 0.2s ease;
+          content: '';
+        }
+      }
+    }
+
+    &.isActive {
+      .menuMiddle {
+        transform: rotate(45deg);
+        transition-delay: 0.1s;
+
+        &::before {
+          top: 0;
+          opacity: 0;
+          transition: top 0.1s ease-in, opacity 0.2s ease-in;
+        }
+
+        &::after {
+          bottom: 0;
+          transform: rotate(-90deg);
+          transition: bottom 0.1s ease-in, transform 0.2s 0.1s ease;
+        }
+      }
+    }
   }
 }
 

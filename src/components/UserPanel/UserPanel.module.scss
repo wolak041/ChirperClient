@@ -1,6 +1,7 @@
 @import '../../assets/styles/variables';
 
 .userPanel {
+  display: inline-block;
   margin: 3px 7px;
   padding: 0;
   text-decoration: none;
@@ -8,15 +9,6 @@
   cursor: pointer;
 
   button {
-    display: flex;
-    align-items: center;
-    padding: 2px 7px;
-    background-color: transparent;
-    border: 0;
-    border-radius: 4px;
-    outline: none;
-    transition: background-color 0.2s ease;
-
     img {
       width: 40px;
       height: 40px;
@@ -31,22 +23,6 @@
       font-weight: 900;
       font-size: 18px;
       letter-spacing: 0.05em;
-    }
-
-    &:hover {
-      background-color: darken($transparent-bg, 20%);
-    }
-
-    &:focus {
-      background-color: darken($transparent-bg, 20%);
-    }
-
-    &:active {
-      background-color: darken($transparent-bg, 30%);
-    }
-
-    &::-moz-focus-inner {
-      border: 0;
     }
   }
 }

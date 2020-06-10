@@ -33,6 +33,7 @@
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "throttle-debounce": "^2.2.1",
     "yup": "^0.28.5"
   },
   "devDependencies": {

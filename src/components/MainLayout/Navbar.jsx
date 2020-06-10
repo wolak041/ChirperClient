@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import { clientUrls } from '../../helpers/constants';
-import { UserPanel } from '../';
+import { UserPanel, Button } from '../';
 import Sidebar from './Sidebar';
 import chirpy from '../../assets/images/chirpy.svg';
 import styles from './MainLayout.module.scss';
@@ -19,17 +19,20 @@ const Navbar = props => {
 
   const location = useLocation();
   const handleLogoClick = () => {
-    location.pathname === clientUrls.MAIN && refreshMainFeed();
+    if (location.pathname === clientUrls.MAIN) {
+      window.scrollTo({ top: 0 });
+      refreshMainFeed();
+    }
   };
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.left}>
         <Link to={clientUrls.MAIN} tabIndex="-1" className={styles.logo}>
-          <button onClick={handleLogoClick}>
+          <Button variant="link" onClick={handleLogoClick}>
             <img src={chirpy} alt="logo" />
             <p>Chirper</p>
-          </button>
+          </Button>
         </Link>
       </div>
       <div className={styles.right}>
@@ -38,16 +41,19 @@ const Navbar = props => {
           userId={user.id}
           classes={{ root: 'showAtMd' }}
         />
-        <button
-          className={`${styles.hamburgerMenu} ${
-            isSidebarActive ? styles.isActive : ''
-          }`}
+        <Button
+          variant="link"
+          classes={{
+            root: `${styles.hamburgerMenu} ${
+              isSidebarActive ? styles.isActive : ''
+            }`,
+          }}
           onClick={handleOpenMenu}
         >
           <div className={styles.menuBox}>
             <div className={styles.menuMiddle} />
           </div>
-        </button>
+        </Button>
       </div>
       <Sidebar
         isSidebarActive={isSidebarActive}

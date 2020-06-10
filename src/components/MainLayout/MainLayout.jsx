@@ -26,9 +26,10 @@ const MainLayout = props => {
     dispatch,
   ]);
 
-  const refreshMainFeedDispatch = useCallback(() => {
-    dispatch(refreshMainFeed());
-  }, [dispatch]);
+  const refreshMainFeedDispatch = useCallback(
+    () => dispatch(refreshMainFeed()),
+    [dispatch],
+  );
 
   const history = useHistory();
   const handleLogout = async () => {

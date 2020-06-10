@@ -50,6 +50,31 @@
     }
   }
 
+  &.link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: unset;
+    padding: 2px 7px;
+    font-weight: unset;
+    font-size: unset;
+    letter-spacing: unset;
+    background-color: transparent;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: darken($transparent-bg, 20%);
+    }
+
+    &:focus {
+      background-color: darken($transparent-bg, 20%);
+    }
+
+    &:active {
+      background-color: darken($transparent-bg, 30%);
+    }
+  }
+
   &::-moz-focus-inner {
     border: 0;
   }

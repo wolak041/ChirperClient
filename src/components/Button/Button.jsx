@@ -2,28 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Button.module.scss';
 
-const Button = (props) => {
+const Button = props => {
   const { onClick, disabled, classes, attributes, variant = 'default' } = props;
-  const variantClass = variant === 'outlined' ? styles.outlined : '';
 
   return (
     <button
-      className={`${classes?.root} ${styles.button} ${variantClass}`}
+      className={`${styles.button} ${styles[variant]} ${classes?.root}`}
       onClick={onClick}
       disabled={disabled}
       {...attributes}
-    >{props.children}</button>
+    >
+      {props.children}
+    </button>
   );
-}
+};
 
 Button.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   classes: PropTypes.shape({
-    root: PropTypes.string
+    root: PropTypes.string,
   }),
   attributes: PropTypes.object,
-  variant: PropTypes.oneOf(['default', 'outlined']),
-}
+  variant: PropTypes.oneOf(['default', 'outlined', 'link']),
+};
 
 export default Button;

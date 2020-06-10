@@ -1,0 +1,64 @@
+@import '../../assets/styles/variables';
+
+.post {
+  margin: 30px 10px;
+  padding: 7px;
+  background-color: $transparent-bg;
+  border-radius: 10px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .userPanel {
+      margin: 0;
+    }
+
+    .date {
+      padding: 2px 7px;
+      color: darken($text, 30%);
+      font-size: 14px;
+    }
+  }
+
+  .content {
+    margin: 10px 15px;
+    white-space: break-spaces;
+    word-break: break-word;
+  }
+
+  .likes {
+    display: inline-block;
+    margin: 5px;
+
+    .likeButton {
+      padding: 4px 6px;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+
+      span {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .userPanelButton,
+  .likeButton {
+    &:hover {
+      background-color: darken($transparent-bg, 35%);
+    }
+
+    &:focus {
+      background-color: darken($transparent-bg, 35%);
+    }
+
+    &:active {
+      background-color: darken($transparent-bg, 45%);
+    }
+  }
+}
+

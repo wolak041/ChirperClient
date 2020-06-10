@@ -1,12 +1,17 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { saveUser } from '../../redux/actions/user';
 import Login from './Login';
 import Register from './Register';
-import { loginUser, registerUser, isNicknameAvailable, isEmailAvailable } from '../../helpers/services';
+import {
+  loginUser,
+  registerUser,
+  isNicknameAvailable,
+  isEmailAvailable,
+} from '../../helpers/services';
 import { clientUrls } from '../../helpers/constants';
 import chirpy from '../../assets/images/chirpy.svg';
 import styles from './Entry.module.scss';
@@ -14,21 +19,25 @@ import styles from './Entry.module.scss';
 const Entry = () => {
   const MODES = {
     LOGIN: 'login',
-    REGISTER: 'register'
+    REGISTER: 'register',
   };
 
   const dispatch = useDispatch();
-  const saveUserDispatch = useCallback(user => dispatch(saveUser(user)), [dispatch]);
+  const saveUserDispatch = useCallback(user => dispatch(saveUser(user)), [
+    dispatch,
+  ]);
 
   const history = useHistory();
 
   const login = {
     initialValues: {
       email: '',
-      password: ''
+      password: '',
     },
     validationSchema: Yup.object({
-      email: Yup.string().email('Invalid email address').required('Field required'),
+      email: Yup.string()
+        .email('Invalid email address')
+        .required('Field required'),
       password: Yup.string().required('Field required'),
     }),
     handleSubmit: async (values, formik) => {
@@ -37,18 +46,17 @@ const Entry = () => {
         formik.setStatus({ formInfo: response.message });
         saveUserDispatch(response.user);
         history.replace(clientUrls.MAIN);
-
       } catch (err) {
         formik.setStatus({});
         formik.setErrors({ formError: err.message });
       }
-    }
+    },
   };
   const loginFormik = useFormik({
     initialValues: login.initialValues,
     validationSchema: login.validationSchema,
     onSubmit: login.handleSubmit,
-    validateOnChange: false
+    validateOnChange: false,
   });
 
   const register = {
@@ -56,44 +64,50 @@ const Entry = () => {
       nickname: '',
       email: '',
       password: '',
-      repeatPassword: ''
+      repeatPassword: '',
     },
     validationSchema: Yup.object().shape({
-      nickname: Yup.string().min(3, 'Nickname must be at least 6 character long')
-        .matches(/^[a-zA-Z0-9_-]*$/g, 'Nickname can contains only alphanumeric characters, underscores and dashes')
+      nickname: Yup.string()
+        .min(3, 'Nickname must be at least 6 character long')
+        .matches(
+          /^[a-zA-Z0-9_-]*$/g,
+          'Nickname can contains only alphanumeric characters, underscores and dashes',
+        )
         .required('Field required'),
-      email: Yup.string().email('Invalid email address').required('Field required'),
-      password: Yup.string().min(6, 'Password must be at least 6 character long')
+      email: Yup.string()
+        .email('Invalid email address')
         .required('Field required'),
-      repeatPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Field required')
+      password: Yup.string()
+        .min(6, 'Password must be at least 6 character long')
+        .required('Field required'),
+      repeatPassword: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+        .required('Field required'),
     }),
     handleSubmit: async (values, formik) => {
       try {
-        if (!await isNicknameAvailable(values.nickname)) {
+        if (!(await isNicknameAvailable(values.nickname))) {
           throw new Error('Nickname is already in use');
-
-        } else if (!await isEmailAvailable(values.email)) {
+        } else if (!(await isEmailAvailable(values.email))) {
           throw new Error('Email is already in use');
-
         } else {
           const response = await registerUser(values);
           formik.setStatus({ formInfo: response.message });
           saveUserDispatch(response.user);
           history.replace(clientUrls.MAIN);
         }
-
       } catch (err) {
         formik.setStatus({});
         formik.setErrors({ formError: err.message });
       }
-    }
+    },
   };
   const registerFormik = useFormik({
     initialValues: register.initialValues,
     validationSchema: register.validationSchema,
     validate: register.validate,
     onSubmit: register.handleSubmit,
-    validateOnChange: false
+    validateOnChange: false,
   });
 
   const [mode, setMode] = useState(MODES.LOGIN);
@@ -105,14 +119,13 @@ const Entry = () => {
         loginFormik.setErrors({});
         loginFormik.setStatus({});
         loginFormik.setTouched({});
-
       } else {
         registerFormik.setErrors({});
         registerFormik.setStatus({});
         registerFormik.setTouched({});
       }
 
-      return isPrevModeLogin ? MODES.REGISTER : MODES.LOGIN
+      return isPrevModeLogin ? MODES.REGISTER : MODES.LOGIN;
     });
   };
 
@@ -122,36 +135,35 @@ const Entry = () => {
         <img src={chirpy} alt="logo" />
         <p>Chirper</p>
       </div>
-      <div className={styles.formWrapper}>
-        <div className={styles.formSwitch}>
-          <input
-            type="radio"
-            name="mode"
-            id="login"
-            checked={mode === MODES.LOGIN}
-            onChange={handleModeToggle}
-          />
-          <label htmlFor="login">Login</label>
-          <input
-            type="radio"
-            name="mode"
-            id="register"
-            checked={mode === MODES.REGISTER}
-            onChange={handleModeToggle}
-          />
-          <label htmlFor="register">Register</label>
+      <div className={styles.container}>
+        <div className={styles.formWrapper}>
+          <div className={styles.formSwitch}>
+            <input
+              type="radio"
+              name="mode"
+              id="login"
+              checked={mode === MODES.LOGIN}
+              onChange={handleModeToggle}
+            />
+            <label htmlFor="login">Login</label>
+            <input
+              type="radio"
+              name="mode"
+              id="register"
+              checked={mode === MODES.REGISTER}
+              onChange={handleModeToggle}
+            />
+            <label htmlFor="register">Register</label>
+          </div>
+          {mode === MODES.LOGIN ? (
+            <Login formik={loginFormik} />
+          ) : (
+            <Register formik={registerFormik} />
+          )}
         </div>
-        {mode === MODES.LOGIN
-          ? <Login
-            formik={loginFormik}
-          />
-          : <Register
-            formik={registerFormik}
-          />
-        }
       </div>
     </div>
   );
-}
+};
 
 export default Entry;

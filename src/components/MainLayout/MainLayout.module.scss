@@ -71,6 +71,7 @@ $sidebar-width: 300px;
   }
 
   .hamburgerMenu {
+    z-index: 11;
     box-sizing: content-box;
     width: 26px;
     height: 26px;
@@ -155,13 +156,14 @@ $sidebar-width: 300px;
   min-width: 230px;
   max-width: $sidebar-width;
   margin: 0;
-  padding: 10px;
+  padding: $nav-height 10px 10px 10px;
   overflow: auto;
   background-color: $nav-bg;
   transition: transform 0.3s ease-in-out;
 
   @media (min-width: $md) {
     top: $nav-height;
+    padding: 10px;
   }
 
   .elementWrapper {

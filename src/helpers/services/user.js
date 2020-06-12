@@ -1,6 +1,6 @@
 import { apiUrls } from '../constants';
 
-const entryOptions = (body) => ({
+const entryOptions = body => ({
   method: 'POST',
   credentials: 'same-origin',
   headers: {
@@ -9,19 +9,20 @@ const entryOptions = (body) => ({
   body: JSON.stringify(body),
 });
 
-const handleRequest = async (request) => {
+const handleRequest = async request => {
   const response = await request.json();
 
   if (request.ok) return response;
   else throw new Error(response.error);
 };
 
-export const getUser = async () => handleRequest(await fetch(apiUrls.GET_USER, { method: 'POST' }));
+export const getUser = async () =>
+  handleRequest(await fetch(apiUrls.GET_USER, { method: 'POST' }));
 
-export const loginUser = async (credentials) =>
+export const loginUser = async credentials =>
   handleRequest(await fetch(apiUrls.LOGIN, entryOptions(credentials)));
 
-export const registerUser = async (credentials) =>
+export const registerUser = async credentials =>
   handleRequest(await fetch(apiUrls.REGISTER, entryOptions(credentials)));
 
 export const logoutUser = async () =>
@@ -40,8 +41,8 @@ const checkAvailability = async (url, body) =>
     )
   ).isAvailable;
 
-export const isNicknameAvailable = async (nickname) =>
+export const isNicknameAvailable = async nickname =>
   checkAvailability(apiUrls.NICKNAME_AVAILABILITY, { nickname });
 
-export const isEmailAvailable = async (email) =>
+export const isEmailAvailable = async email =>
   checkAvailability(apiUrls.EMAIL_AVAILABILITY, { email });

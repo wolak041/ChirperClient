@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 import styles from './Entry.module.scss';
 import { Text, Button, HelperText } from '../../components';
 
-const Register = (props) => {
-  const { values, errors, status, touched, isSubmitting, handleChange, handleBlur, handleSubmit } = props.formik;
+const Register = props => {
+  const {
+    values,
+    errors,
+    status,
+    touched,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = props.formik;
 
   return (
     <>
-      <form
-        className={styles.form}
-        onSubmit={handleSubmit}
-      >
+      <form className={styles.form} onSubmit={handleSubmit}>
         <Text
           type="text"
           name="nickname"
@@ -32,9 +38,7 @@ const Register = (props) => {
           onChange={handleChange}
           onBlur={handleBlur}
         >
-          <HelperText type="error">
-            {touched.email && errors.email}
-          </HelperText>
+          <HelperText type="error">{touched.email && errors.email}</HelperText>
         </Text>
         <Text
           type="password"
@@ -60,21 +64,24 @@ const Register = (props) => {
             {touched.repeatPassword && errors.repeatPassword}
           </HelperText>
         </Text>
-        <Button
-          attributes={{ type: 'submit' }}
-          disabled={isSubmitting}
-        >Sign up</Button>
+        <Button attributes={{ type: 'submit' }} disabled={isSubmitting}>
+          Sign up
+        </Button>
       </form>
       <div className={styles.helper}>
-        {errors?.formError && <HelperText type="error">{errors.formError}</HelperText>}
-        {status?.formInfo && <HelperText type="success">{status.formInfo}</HelperText>}
+        {errors?.formError && (
+          <HelperText type="error">{errors.formError}</HelperText>
+        )}
+        {status?.formInfo && (
+          <HelperText type="success">{status.formInfo}</HelperText>
+        )}
       </div>
     </>
   );
-}
+};
 
 Register.propTypes = {
   formik: PropTypes.object,
-}
+};
 
 export default Register;

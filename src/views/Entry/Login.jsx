@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 import styles from './Entry.module.scss';
 import { Text, Button, HelperText } from '../../components';
 
-const Login = (props) => {
-  const { values, errors, status, touched, isSubmitting, handleChange, handleBlur, handleSubmit } = props.formik;
+const Login = props => {
+  const {
+    values,
+    errors,
+    status,
+    touched,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = props.formik;
 
   return (
     <>
-      <form
-        className={styles.form}
-        onSubmit={handleSubmit}
-      >
+      <form className={styles.form} onSubmit={handleSubmit}>
         <Text
           type="email"
           name="email"
@@ -20,9 +26,7 @@ const Login = (props) => {
           onChange={handleChange}
           onBlur={handleBlur}
         >
-          <HelperText type="error">
-            {touched.email && errors.email}
-          </HelperText>
+          <HelperText type="error">{touched.email && errors.email}</HelperText>
         </Text>
         <Text
           type="password"
@@ -36,21 +40,29 @@ const Login = (props) => {
             {touched.password && errors.password}
           </HelperText>
         </Text>
-        <Button
-          attributes={{ type: 'submit' }}
-          disabled={isSubmitting}
-        >Sign in</Button>
+        {/* <div className={styles.forgetPassword}>
+          <a href="#">
+            Forget password?
+          </a>
+        </div> */}
+        <Button attributes={{ type: 'submit' }} disabled={isSubmitting}>
+          Sign in
+        </Button>
       </form>
       <div className={styles.helper}>
-        {errors?.formError && <HelperText type="error">{errors.formError}</HelperText>}
-        {status?.formInfo && <HelperText type="success">{status.formInfo}</HelperText>}
+        {errors?.formError && (
+          <HelperText type="error">{errors.formError}</HelperText>
+        )}
+        {status?.formInfo && (
+          <HelperText type="success">{status.formInfo}</HelperText>
+        )}
       </div>
     </>
   );
-}
+};
 
 Login.propTypes = {
   formik: PropTypes.object,
-}
+};
 
 export default Login;

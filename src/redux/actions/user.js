@@ -20,15 +20,8 @@ export const fetchUser = () => async dispatch => {
   }
 };
 
-export const saveUser = user => async dispatch => {
-  dispatch({
-    type: USER_SUCCESS,
-    payload: { user },
-  });
-};
+export const saveUser = user => async dispatch =>
+  dispatch({ type: USER_SUCCESS, payload: { user } });
 
-export const userLogout = () => async dispatch => {
-  dispatch({
-    type: USER_LOGOUT,
-  });
-};
+export const userLogout = () => async dispatch =>
+  dispatch({ type: USER_LOGOUT });

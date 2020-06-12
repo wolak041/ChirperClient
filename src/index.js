@@ -6,19 +6,21 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import App from './App.jsx';
 
-const render = (Component) => {
+const render = Component => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
         <Component />
       </Provider>
     </AppContainer>,
-    document.getElementById('react-root')
+    document.getElementById('react-root'),
   );
 };
 
 render(App);
 
 if (module.hot) {
-  module.hot.accept('./App.jsx', () => { render(App) })
+  module.hot.accept('./App.jsx', () => {
+    render(App);
+  });
 }

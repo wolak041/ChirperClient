@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const WebpackBar = require('webpackbar');
 
-module.exports = (env) => {
+module.exports = env => {
   console.log(
     `\n🚀🚀🚀 RUNNING CHIRPER CLIENT IN ${
       env.production ? 'PRODUCTION' : 'DEVELOPMENT'
@@ -21,7 +21,7 @@ module.exports = (env) => {
         template: path.resolve(__dirname, '../public/index.html'),
         favicon: path.resolve(__dirname, '../public/favicon.ico'),
       }),
-      new WebpackBar()
+      new WebpackBar(),
     ],
     resolve: {
       extensions: ['.js', '.jsx'],

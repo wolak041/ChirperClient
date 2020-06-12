@@ -5,34 +5,35 @@ import info from '../../assets/images/info.svg';
 import error from '../../assets/images/error.svg';
 import styles from './HelperText.module.scss';
 
-const HelperText = (props) => {
+const HelperText = props => {
   const { classes, attributes, type } = props;
   const icons = {
     success,
     info,
-    error
-  }
+    error,
+  };
 
   return (
     <>
-      {props.children && <div
-        className={`${classes?.root} ${styles.helperText} ${styles?.[type]}`}
-        {...attributes}
-      >
-        {icons[type] && <img src={icons[type]} alt="success" />}
-        {props.children}
-      </div>
-      }
+      {props.children && (
+        <div
+          className={`${classes?.root} ${styles.helperText} ${styles?.[type]}`}
+          {...attributes}
+        >
+          {icons[type] && <img src={icons[type]} alt="success" />}
+          {props.children}
+        </div>
+      )}
     </>
   );
-}
+};
 
 HelperText.propTypes = {
   type: PropTypes.oneOf(['info', 'success', 'error']).isRequired,
   classes: PropTypes.shape({
-    root: PropTypes.string
+    root: PropTypes.string,
   }),
-  attributes: PropTypes.object
-}
+  attributes: PropTypes.object,
+};
 
 export default HelperText;

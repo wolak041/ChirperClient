@@ -6,7 +6,7 @@ import {
   isNicknameAvailable,
   isEmailAvailable,
 } from './user';
-import { getMainFeed, getUserFeed, extractPostIds } from './feed';
+import { getMainFeed, getUserFeed, extractPostIds, saveNewPost } from './feed';
 
 export {
   getUser,
@@ -18,4 +18,5 @@ export {
   getMainFeed,
   getUserFeed,
   extractPostIds,
+  saveNewPost,
 };

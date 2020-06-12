@@ -18,7 +18,6 @@ $focus-bg: darken($transparent-bg, 5%);
 
 .fieldWrapper {
   position: relative;
-  min-height: 40px;
   background-color: darken($transparent-bg, 15%);
   border-radius: $border-radius;
   transition: background-color 0.2s ease;
@@ -46,6 +45,12 @@ $focus-bg: darken($transparent-bg, 5%);
     &::-moz-focus-inner {
       border: 0;
     }
+  }
+
+  .textarea {
+    display: block;
+    overflow: auto;
+    resize: none;
   }
 
   .label {

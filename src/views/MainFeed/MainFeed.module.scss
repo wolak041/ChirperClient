@@ -1,0 +1,67 @@
+@import '../../assets/styles/variables';
+
+.newPostPanel {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 10px;
+
+  .userPanel {
+    margin: 5px 7px 5px 0;
+
+    button {
+      padding: 0;
+
+      img {
+        margin: 0;
+      }
+
+      p {
+        display: none;
+      }
+    }
+  }
+
+  .newPost {
+    flex: 1;
+    margin: 0;
+
+    .newPostInput {
+      font-weight: normal;
+    }
+  }
+}
+
+.newPostWrapper {
+  margin: 20px;
+
+  .buttonWrapper {
+    position: relative;
+    min-height: 0;
+    transition: min-height 0.3s ease;
+
+    .addButton {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      display: block;
+      margin-right: 10px;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    &.active {
+      min-height: $button-height;
+
+      .addButton {
+        transform: scaleY(1);
+        opacity: 1;
+        pointer-events: unset;
+      }
+    }
+  }
+}

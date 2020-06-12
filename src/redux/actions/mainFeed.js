@@ -1,8 +1,10 @@
 import {
   MAIN_FEED_PENDING,
   MAIN_FEED_PART,
-  MAIN_FEED_ERROR,
   MAIN_FEED_REFRESH,
+  NEW_POST_CHANGE,
+  NEW_POST_SAVE,
+  MAIN_FEED_ERROR,
 } from './actionTypes';
 import { getMainFeed } from '../../helpers/services';
 import { feed } from '../../helpers/constants';
@@ -39,4 +41,23 @@ export const fetchMainFeed = (lastPostDate, limit, lastPostsIds) =>
   handleGetMainFeed(lastPostDate, limit, lastPostsIds, MAIN_FEED_PART);
 
 export const refreshMainFeed = () =>
-  handleGetMainFeed(new Date().toISOString(), feed.FETCH_POSTS_LIMIT, [], MAIN_FEED_REFRESH);
+  handleGetMainFeed(
+    new Date().toISOString(),
+    feed.FETCH_POSTS_LIMIT,
+    [],
+    MAIN_FEED_REFRESH,
+  );
+
+export const newPostChange = newPost => dispatch => {
+  dispatch({
+    type: NEW_POST_CHANGE,
+    payload: { newPost },
+  });
+};
+
+export const newPostSave = newPost => dispatch => {
+  dispatch({
+    type: NEW_POST_SAVE,
+    payload: { newPost },
+  });
+};

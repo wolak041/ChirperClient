@@ -1,7 +1,7 @@
 @import '../../assets/styles/variables';
 
 .button {
-  height: 40px;
+  height: $button-height;
   color: $text;
   font-weight: 900;
   font-size: 18px;

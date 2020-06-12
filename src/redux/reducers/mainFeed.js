@@ -1,8 +1,10 @@
 import {
   MAIN_FEED_PENDING,
   MAIN_FEED_PART,
-  MAIN_FEED_ERROR,
   MAIN_FEED_REFRESH,
+  NEW_POST_CHANGE,
+  NEW_POST_SAVE,
+  MAIN_FEED_ERROR,
 } from '../actions/actionTypes';
 import { statusIndicators, feed } from '../../helpers/constants';
 import { extractPostIds } from '../../helpers/services';
@@ -12,6 +14,7 @@ const initialState = {
   mainFeed: [],
   lastPostDate: new Date().toISOString(),
   lastPostsIds: [],
+  newPost: '',
 };
 
 export default (state = initialState, action) => {
@@ -41,12 +44,6 @@ export default (state = initialState, action) => {
         lastPostsIds,
       };
     }
-    case MAIN_FEED_ERROR: {
-      return {
-        ...state,
-        status: statusIndicators.ERROR,
-      };
-    }
     case MAIN_FEED_REFRESH: {
       const { mainFeed } = action.payload;
 
@@ -59,6 +56,30 @@ export default (state = initialState, action) => {
         mainFeed,
         lastPostDate,
         lastPostsIds,
+      };
+    }
+    case NEW_POST_CHANGE: {
+      const { newPost } = action.payload;
+
+      return {
+        ...state,
+        newPost,
+      };
+    }
+    case NEW_POST_SAVE: {
+      const { newPost } = action.payload;
+      const mainFeed = [newPost, ...state.mainFeed];
+
+      return {
+        ...state,
+        mainFeed,
+        newPost: '',
+      };
+    }
+    case MAIN_FEED_ERROR: {
+      return {
+        ...state,
+        status: statusIndicators.ERROR,
       };
     }
     default:

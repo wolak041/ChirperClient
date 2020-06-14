@@ -16,8 +16,8 @@ const handleRequest = async request => {
   else throw new Error(response.error);
 };
 
-export const getUser = async () =>
-  handleRequest(await fetch(apiUrls.GET_USER, { method: 'POST' }));
+export const getLoggedUser = async () =>
+  handleRequest(await fetch(apiUrls.GET_LOGGED_USER, { method: 'POST' }));
 
 export const loginUser = async credentials =>
   handleRequest(await fetch(apiUrls.LOGIN, entryOptions(credentials)));

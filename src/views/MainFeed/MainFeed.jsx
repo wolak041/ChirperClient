@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   fetchMainFeed,
@@ -23,6 +24,11 @@ const MainFeed = () => {
   const { user } = useSelector(state => getUserState(state));
 
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const handleNewPostChange = event => {
     dispatch(newPostChange(event.target.value));

@@ -1,5 +1,5 @@
 import {
-  getUser,
+  getLoggedUser,
   loginUser,
   registerUser,
   logoutUser,
@@ -9,7 +9,7 @@ import {
 import { getMainFeed, getUserFeed, extractPostIds, saveNewPost } from './feed';
 
 export {
-  getUser,
+  getLoggedUser,
   loginUser,
   registerUser,
   logoutUser,

@@ -1,7 +1,7 @@
 export const apiUrls = {
   LOGIN: '/api/login',
   REGISTER: '/api/register',
-  GET_USER: '/api/user/get',
+  GET_LOGGED_USER: '/api/user/getLogged',
   LOGOUT: '/api/logout',
   GET_MAIN_FEED: '/api/feed/main',
   GET_USER_FEED: '/api/feed/user',

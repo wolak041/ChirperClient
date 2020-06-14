@@ -1,7 +1,7 @@
 import {
   MAIN_FEED_PENDING,
-  MAIN_FEED_PART,
   MAIN_FEED_REFRESH,
+  MAIN_FEED_PART,
   NEW_POST_CHANGE,
   NEW_POST_SAVE,
   MAIN_FEED_ERROR,
@@ -25,6 +25,20 @@ export default (state = initialState, action) => {
         status: statusIndicators.PENDING,
       };
     }
+    case MAIN_FEED_REFRESH: {
+      const { mainFeed } = action.payload;
+
+      const lastPostDate = mainFeed.slice(-1)[0].date;
+      const lastPostsIds = extractPostIds(mainFeed);
+
+      return {
+        ...state,
+        status: statusIndicators.SUCCESS,
+        mainFeed,
+        lastPostDate,
+        lastPostsIds,
+      };
+    }
     case MAIN_FEED_PART: {
       const { mainFeed } = action.payload;
 
@@ -40,20 +54,6 @@ export default (state = initialState, action) => {
         ...state,
         status: statusIndicators.SUCCESS,
         mainFeed: updatedMainFeed,
-        lastPostDate,
-        lastPostsIds,
-      };
-    }
-    case MAIN_FEED_REFRESH: {
-      const { mainFeed } = action.payload;
-
-      const lastPostDate = mainFeed.slice(-1)[0].date;
-      const lastPostsIds = extractPostIds(mainFeed);
-
-      return {
-        ...state,
-        status: statusIndicators.SUCCESS,
-        mainFeed,
         lastPostDate,
         lastPostsIds,
       };

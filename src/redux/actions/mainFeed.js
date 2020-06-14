@@ -1,7 +1,7 @@
 import {
   MAIN_FEED_PENDING,
-  MAIN_FEED_PART,
   MAIN_FEED_REFRESH,
+  MAIN_FEED_PART,
   NEW_POST_CHANGE,
   NEW_POST_SAVE,
   MAIN_FEED_ERROR,
@@ -37,9 +37,6 @@ const handleGetMainFeed = (
   }
 };
 
-export const fetchMainFeed = (lastPostDate, limit, lastPostsIds) =>
-  handleGetMainFeed(lastPostDate, limit, lastPostsIds, MAIN_FEED_PART);
-
 export const refreshMainFeed = () =>
   handleGetMainFeed(
     new Date().toISOString(),
@@ -47,6 +44,9 @@ export const refreshMainFeed = () =>
     [],
     MAIN_FEED_REFRESH,
   );
+
+export const fetchMainFeed = (lastPostDate, limit, lastPostsIds) =>
+  handleGetMainFeed(lastPostDate, limit, lastPostsIds, MAIN_FEED_PART);
 
 export const newPostChange = newPost => dispatch => {
   dispatch({

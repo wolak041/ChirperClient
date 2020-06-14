@@ -25,12 +25,12 @@ export const getMainFeed = async (lastPostDate, limit, lastPostsIds) =>
     lastPostsIds,
   });
 
-export const getUserFeed = async (lastPostDate, limit, lastPostsIds, user) =>
+export const getUserFeed = async (lastPostDate, limit, lastPostsIds, userId) =>
   request(apiUrls.GET_USER_FEED, {
     lastPostDate,
     limit,
     lastPostsIds,
-    user,
+    userId,
   });
 
 export const extractPostIds = feed =>

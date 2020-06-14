@@ -1,0 +1,24 @@
+@import '../../assets/styles/variables';
+
+.userPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 220px;
+  margin: 30px 20px;
+  padding: 7px;
+  border-radius: 10px;
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
+
+  p {
+    margin: 24px 0 0;
+    color: $primary;
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: 0.05em;
+  }
+}

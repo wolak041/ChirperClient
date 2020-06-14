@@ -1,5 +1,5 @@
 import { USER_PENDING, USER_SUCCESS, USER_LOGOUT } from './actionTypes';
-import { getUser } from '../../helpers/services';
+import { getLoggedUser } from '../../helpers/services';
 
 export const fetchUser = () => async dispatch => {
   dispatch({
@@ -7,16 +7,11 @@ export const fetchUser = () => async dispatch => {
   });
 
   try {
-    const { user } = await getUser();
+    const { user } = await getLoggedUser();
 
-    dispatch({
-      type: USER_SUCCESS,
-      payload: { user },
-    });
+    dispatch({ type: USER_SUCCESS, payload: { user } });
   } catch (error) {
-    dispatch({
-      type: USER_LOGOUT,
-    });
+    dispatch({ type: USER_LOGOUT });
   }
 };
 

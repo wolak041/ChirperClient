@@ -5,6 +5,8 @@ import {
   logoutUser,
   isNicknameAvailable,
   isEmailAvailable,
+  changeEmail,
+  changePassword,
 } from './user';
 import { getMainFeed, getUserFeed, extractPostIds, saveNewPost } from './feed';
 
@@ -19,4 +21,6 @@ export {
   getUserFeed,
   extractPostIds,
   saveNewPost,
+  changeEmail,
+  changePassword,
 };

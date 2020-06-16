@@ -5,5 +5,6 @@ import HelperText from './HelperText/HelperText';
 import MainLayout from './MainLayout/MainLayout';
 import UserPanel from './UserPanel/UserPanel';
 import Post from './Post/Post';
+import Collapsible from './Collapsible/Collapsible';
 
-export { Loading, Text, Button, HelperText, MainLayout, UserPanel, Post };
+export { Loading, Text, Button, HelperText, MainLayout, UserPanel, Post, Collapsible };

@@ -30,6 +30,10 @@
     .newPostInput {
       font-weight: normal;
     }
+
+    > :last-child {
+      display: none;
+    }
   }
 }
 

@@ -1,0 +1,48 @@
+@import '../../assets/styles/variables';
+
+.manageAccount {
+  margin: 30px 20px;
+  padding: 7px;
+  background-color: $transparent-bg;
+  border-radius: 10px;
+
+  .userPanel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+
+    p {
+      margin: 18px;
+      color: $primary;
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  .buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+
+    > * {
+      margin: 10px;
+    }
+  }
+
+  .form {
+    button {
+      width: 100%;
+    }
+
+    + div {
+      margin-top: 10px;
+    }
+  }
+}

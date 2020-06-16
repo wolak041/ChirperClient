@@ -1,16 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { getUserState } from '../../redux/selectors';
+import ChangeEmail from './ChangeEmail';
+import ChangePassword from './ChangePassword';
+import userDefault from '../../assets/images/user-default.svg';
+import styles from './ManageAccount.module.scss';
 
-class ManageAccount extends React.Component {
-  render() {
-    return (
-      <div>ManageAccount</div>
-    );
-  }
-}
+const ManageAccount = () => {
+  const { user } = useSelector(state => getUserState(state));
 
-ManageAccount.propTypes = {
-  test: PropTypes.any
-}
+  return (
+    <div className={styles.manageAccount}>
+      <div className={styles.userPanel}>
+        <img src={userDefault} alt="user" />
+        <p>{user.nickname}</p>
+      </div>
+      <div className={styles.buttonWrapper}>
+        <ChangeEmail />
+        <ChangePassword />
+      </div>
+    </div>
+  );
+};
 
 export default ManageAccount;

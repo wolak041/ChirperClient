@@ -1,0 +1,40 @@
+@import '../../assets/styles/variables';
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  .arrow {
+    position: relative;
+    display: flex;
+    width: 15px;
+    height: 15px;
+    margin: 0 4%;
+    transition: transform 0.4s ease-in-out;
+
+    &.reverse {
+      transform: scaleY(-1);
+    }
+  }
+
+  > span {
+    flex: 1;
+  }
+}
+
+.content {
+  max-height: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0;
+  transition: all 0.4s ease;
+
+  &.active {
+    max-height: 1000px;
+    margin: 15px 20px 0;
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}

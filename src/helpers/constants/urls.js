@@ -3,6 +3,8 @@ export const apiUrls = {
   REGISTER: '/api/register',
   GET_LOGGED_USER: '/api/user/getLogged',
   LOGOUT: '/api/logout',
+  CHANGE_EMAIL: '/api/account/changeEmail',
+  CHANGE_PASSWORD: '/api/account/changePassword',
   GET_MAIN_FEED: '/api/feed/main',
   GET_USER_FEED: '/api/feed/user',
   SAVE_POST: '/api/feed/save',

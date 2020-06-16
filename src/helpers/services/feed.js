@@ -38,3 +38,20 @@ export const extractPostIds = feed =>
 
 export const saveNewPost = async newPost =>
   request(apiUrls.SAVE_POST, { newPost });
+
+export const likePostFetch = async postId =>
+  request(apiUrls.LIKE_POST, { postId });
+
+export const dislikePostFetch = async postId =>
+  request(apiUrls.DISLIKE_POST, { postId });
+
+export const likePostToggle = (feed, postId) =>
+  feed.map(post =>
+    post._id === postId
+      ? {
+          ...post,
+          isLiked: !post.isLiked,
+          likesNumber: post.likesNumber + (post.isLiked ? -1 : 1),
+        }
+      : { ...post },
+  );

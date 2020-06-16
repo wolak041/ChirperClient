@@ -8,7 +8,15 @@ import {
   changeEmail,
   changePassword,
 } from './user';
-import { getMainFeed, getUserFeed, extractPostIds, saveNewPost } from './feed';
+import {
+  getMainFeed,
+  getUserFeed,
+  extractPostIds,
+  saveNewPost,
+  likePostFetch,
+  dislikePostFetch,
+  likePostToggle
+} from './feed';
 
 export {
   getLoggedUser,
@@ -23,4 +31,7 @@ export {
   saveNewPost,
   changeEmail,
   changePassword,
+  likePostFetch,
+  dislikePostFetch,
+  likePostToggle
 };

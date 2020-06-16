@@ -5,8 +5,13 @@ import {
   NEW_POST_CHANGE,
   NEW_POST_SAVE,
   MAIN_FEED_ERROR,
+  LIKE_POST_TOGGLE,
 } from './actionTypes';
-import { getMainFeed } from '../../helpers/services';
+import {
+  getMainFeed,
+  likePostFetch,
+  dislikePostFetch,
+} from '../../helpers/services';
 import { feed } from '../../helpers/constants';
 
 const handleGetMainFeed = (
@@ -61,3 +66,24 @@ export const newPostSave = newPost => dispatch => {
     payload: { newPost },
   });
 };
+
+const likePostToggle = async (dispatch, postId, fetch) => {
+  const dispatchLikeToggle = () =>
+    dispatch({
+      type: LIKE_POST_TOGGLE,
+      payload: { postId },
+    });
+
+  dispatchLikeToggle();
+  try {
+    await fetch(postId);
+  } catch (error) {
+    dispatchLikeToggle();
+  }
+};
+
+export const likePost = postId => async dispatch =>
+  likePostToggle(dispatch, postId, likePostFetch);
+
+export const dislikePost = postId => async dispatch =>
+  likePostToggle(dispatch, postId, dislikePostFetch);

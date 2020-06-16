@@ -5,9 +5,10 @@ import {
   NEW_POST_CHANGE,
   NEW_POST_SAVE,
   MAIN_FEED_ERROR,
+  LIKE_POST_TOGGLE,
 } from '../actions/actionTypes';
 import { statusIndicators, feed } from '../../helpers/constants';
-import { extractPostIds } from '../../helpers/services';
+import { extractPostIds, likePostToggle } from '../../helpers/services';
 
 const initialState = {
   status: statusIndicators.PENDING,
@@ -74,6 +75,15 @@ export default (state = initialState, action) => {
         ...state,
         mainFeed,
         newPost: '',
+      };
+    }
+    case LIKE_POST_TOGGLE: {
+      const { postId } = action.payload;
+      const mainFeed = likePostToggle(state.mainFeed, postId);
+
+      return {
+        ...state,
+        mainFeed,
       };
     }
     case MAIN_FEED_ERROR: {

@@ -8,6 +8,8 @@ export const apiUrls = {
   GET_MAIN_FEED: '/api/feed/main',
   GET_USER_FEED: '/api/feed/user',
   SAVE_POST: '/api/feed/save',
+  LIKE_POST: '/api/feed/like',
+  DISLIKE_POST: '/api/feed/dislike',
   NICKNAME_AVAILABILITY: '/api/availability/nickname',
   EMAIL_AVAILABILITY: '/api/availability/email',
 };

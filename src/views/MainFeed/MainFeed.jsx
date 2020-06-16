@@ -5,6 +5,8 @@ import {
   fetchMainFeed,
   newPostChange,
   newPostSave,
+  likePost,
+  dislikePost,
 } from '../../redux/actions/mainFeed';
 import { getMainFeedState, getUserState } from '../../redux/selectors';
 import { Post, Text, UserPanel, Button } from '../../components';
@@ -47,6 +49,9 @@ const MainFeed = () => {
       console.log('This post looks empty. Write something 😀'); //TODO: display message in modal
     }
   };
+
+  const like = id => dispatch(likePost(id));
+  const dislike = id => dispatch(dislikePost(id));
 
   const debounceFetch = debounce(400, false, () => {
     dispatch(fetchMainFeed(lastPostDate, feed.FETCH_POSTS_LIMIT, lastPostsIds));
@@ -102,7 +107,16 @@ const MainFeed = () => {
         </div>
       </div>
       {mainFeed.map(post => (
-        <Post date={post.date} user={post.user} key={post._id}>
+        <Post
+          id={post._id}
+          date={post.date}
+          user={post.user}
+          likesNumber={post.likesNumber}
+          isLiked={post.isLiked}
+          like={like}
+          dislike={dislike}
+          key={post._id}
+        >
           {post.content}
         </Post>
       ))}

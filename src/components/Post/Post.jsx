@@ -6,7 +6,7 @@ import heartFilled from '../../assets/images/heart-filled.svg';
 import styles from './Post.module.scss';
 
 const Post = props => {
-  const { user, date, isLiked, likesNumber = 0 } = props;
+  const { id, user, date, isLiked, likesNumber = 0, like, dislike } = props;
   const formattedDate = new Date(date).toLocaleString(undefined, {
     day: '2-digit',
     month: '2-digit',
@@ -14,6 +14,9 @@ const Post = props => {
     hour: '2-digit',
     minute: '2-digit',
   });
+
+  const handleLikeClick = () => like(id);
+  const handleDislikeClick = () => dislike(id);
 
   return (
     <div className={styles.post}>
@@ -27,20 +30,32 @@ const Post = props => {
       </div>
       <div className={styles.content}>{props.children}</div>
       <div className={styles.likes}>
-        <Button variant='link' classes={{ root: styles.likeButton }}>
-          {isLiked ? (
+        {isLiked ? (
+          <Button
+            variant="link"
+            onClick={handleDislikeClick}
+            classes={{ root: styles.likeButton }}
+          >
             <img src={heartFilled} alt="heart filled" />
-          ) : (
+            <span>{likesNumber}</span>
+          </Button>
+        ) : (
+          <Button
+            variant="link"
+            onClick={handleLikeClick}
+            classes={{ root: styles.likeButton }}
+          >
             <img src={heartOutline} alt="heart outlined" />
-          )}
-          <span>{likesNumber}</span>
-        </Button>
+            <span>{likesNumber}</span>
+          </Button>
+        )}
       </div>
     </div>
   );
 };
 
 Post.propTypes = {
+  id: PropTypes.string,
   user: PropTypes.shape({
     _id: PropTypes.string,
     nickname: PropTypes.string,
@@ -48,6 +63,8 @@ Post.propTypes = {
   date: PropTypes.string,
   isLiked: PropTypes.bool,
   likesNumber: PropTypes.number,
+  like: PropTypes.func,
+  dislike: PropTypes.func,
 };
 
 export default Post;

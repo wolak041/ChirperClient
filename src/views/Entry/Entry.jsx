@@ -14,7 +14,7 @@ import {
   isEmailAvailable,
 } from '../../helpers/services';
 import { clientUrls } from '../../helpers/constants';
-import chirpy from '../../assets/images/chirpy.svg';
+import chirpy from '../../assets/images/chirpy.png';
 import styles from './Entry.module.scss';
 
 const Entry = () => {

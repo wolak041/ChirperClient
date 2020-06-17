@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { clientUrls } from '../../helpers/constants';
 import { UserPanel, Button } from '../';
 import Sidebar from './Sidebar';
-import chirpy from '../../assets/images/chirpy.svg';
+import chirpy from '../../assets/images/chirpy.png';
 import styles from './MainLayout.module.scss';
 
 const Navbar = props => {

@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
@@ -166,4 +167,4 @@ const Entry = () => {
   );
 };
 
-export default Entry;
+export default hot(Entry);

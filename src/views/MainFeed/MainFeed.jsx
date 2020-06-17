@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -125,4 +126,4 @@ const MainFeed = () => {
   );
 };
 
-export default MainFeed;
+export default hot(MainFeed);

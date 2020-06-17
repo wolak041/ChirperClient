@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React, { useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -93,4 +94,4 @@ const UserFeed = () => {
   );
 };
 
-export default UserFeed;
+export default hot(UserFeed);

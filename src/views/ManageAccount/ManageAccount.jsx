@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getUserState } from '../../redux/selectors';
@@ -23,4 +24,4 @@ const ManageAccount = () => {
   );
 };
 
-export default ManageAccount;
+export default hot(ManageAccount);

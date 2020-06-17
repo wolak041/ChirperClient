@@ -1,26 +1,13 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import loadable from '@loadable/component';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUser } from './redux/actions/user';
 import { getUserState } from './redux/selectors';
 import { statusIndicators } from './helpers/constants';
 import { Loading } from './components';
+import AuthenticatedApp from './AuthenticatedApp';
+import UnauthenticatedApp from './UnauthenticatedApp';
 import './assets/styles/app.scss';
-
-const AuthenticatedApp = loadable(
-  () => import(/* webpackChunkName: "auth-app" */ './AuthenticatedApp'),
-  {
-    fallback: <Loading />,
-  },
-);
-
-const UnauthenticatedApp = loadable(
-  () => import(/* webpackChunkName: "unauth-app" */ './UnauthenticatedApp'),
-  {
-    fallback: <Loading />,
-  },
-);
 
 const displayApp = status => {
   switch (status) {

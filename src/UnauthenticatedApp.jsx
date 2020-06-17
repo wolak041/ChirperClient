@@ -1,8 +1,18 @@
-import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Entry from './views/Entry/Entry';
+import loadable from '@loadable/component';
+import { Loading } from './components';
 import { clientUrls } from './helpers/constants';
+
+const Entry = loadable(
+  () =>
+    import(
+      /* webpackPrefetch: true, webpackChunkName: "entry" */ './views/Entry/Entry'
+    ),
+  {
+    fallback: <Loading />,
+  },
+);
 
 const UnauthenticatedApp = () => {
   return (
@@ -15,4 +25,4 @@ const UnauthenticatedApp = () => {
   );
 };
 
-export default hot(UnauthenticatedApp);
+export default UnauthenticatedApp;

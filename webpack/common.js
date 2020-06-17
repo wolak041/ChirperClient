@@ -81,6 +81,19 @@ module.exports = env => {
               },
             },
           ],
+          exclude: [/node_modules/],
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                outputPath: 'fonts',
+              },
+            },
+          ],
+          exclude: [/node_modules/],
         },
       ],
     },

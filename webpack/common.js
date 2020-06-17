@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 const WebpackBar = require('webpackbar');
 
 module.exports = env => {
@@ -12,7 +13,8 @@ module.exports = env => {
   return {
     entry: path.resolve(__dirname, '../src/index.js'),
     output: {
-      filename: 'main.js',
+      filename: 'js/[name].js',
+      chunkFilename: 'js/[name].chunk.js',
       publicPath: '/',
       path: path.resolve(__dirname, '../dist'),
     },
@@ -20,6 +22,25 @@ module.exports = env => {
       new HtmlWebPackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
         favicon: path.resolve(__dirname, '../public/favicon.ico'),
+      }),
+      new WebpackPwaManifest({
+        name: 'Chirper',
+        short_name: 'Chirper',
+        description: 'Social platform',
+        background_color: '#092429',
+        theme_color: '#092429',
+        display: 'standalone',
+        orientation: 'portrait-primary',
+        start_url: '/',
+        icons: [
+          {
+            src: path.resolve(__dirname, '../src/assets/images/chirpy.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            ios: true
+          },
+        ],
+        inject: true,
+        ios: true,
       }),
       new WebpackBar(),
     ],
@@ -56,6 +77,7 @@ module.exports = env => {
               },
             },
           ],
+          exclude: [/node_modules/],
         },
         {
           test: /\.scss$/,

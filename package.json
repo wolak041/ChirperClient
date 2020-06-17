@@ -8,7 +8,7 @@
     "build": "npm run lint && webpack -p --config=webpack/prod.js --env.production",
     "api:build": "npm run build && npm run api:clear-build && npm run api:copy-build",
     "api:clear-build": "rimraf ../api/public/*",
-    "api:copy-build": "copyfiles -e dist/report.html -u 1 dist/**/*.* ../api/public",
+    "api:copy-build": "copyfiles -e dist/report.html -e dist/**/*.js -u 1 dist/**/*.* ../api/public",
     "prettier-watch": "onchange \"src/**/*\" -- prettier --write {{changed}}",
     "lint": "eslint src && stylelint src/**/*.scss",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -51,6 +51,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^3.0.0",
+    "compression-webpack-plugin": "^4.0.0",
     "copyfiles": "^2.2.0",
     "css-loader": "^3.5.3",
     "eslint": "^6.8.0",
@@ -79,6 +80,7 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2",
+    "webpack-pwa-manifest": "^4.2.0",
     "webpackbar": "^4.0.0"
   },
   "husky": {

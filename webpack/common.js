@@ -104,7 +104,13 @@ module.exports = env => {
             {
               loader: 'file-loader',
               options: {
-                outputPath: 'images',
+                outputPath: 'images/',
+              },
+            },
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                disable: true,
               },
             },
           ],

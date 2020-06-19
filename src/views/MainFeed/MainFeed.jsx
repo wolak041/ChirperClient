@@ -80,7 +80,7 @@ const MainFeed = () => {
         <div className={styles.newPostPanel}>
           <UserPanel
             nickname={user.nickname}
-            userId={user.id}
+            userId={user._id}
             classes={{ root: styles.userPanel }}
           />
           <Text

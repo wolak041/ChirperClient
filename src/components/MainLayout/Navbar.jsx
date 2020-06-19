@@ -38,7 +38,7 @@ const Navbar = props => {
       <div className={styles.right}>
         <UserPanel
           nickname={user.nickname}
-          userId={user.id}
+          userId={user._id}
           classes={{ root: 'showAtMd' }}
         />
         <Button
@@ -58,7 +58,7 @@ const Navbar = props => {
       <Sidebar
         isSidebarActive={isSidebarActive}
         nickname={user.nickname}
-        userId={user.id}
+        userId={user._id}
         handleCloseMenu={handleCloseMenu}
         handleLogout={handleLogout}
       />
@@ -73,7 +73,7 @@ Navbar.propTypes = {
   handleLogout: PropTypes.func,
   refreshMainFeed: PropTypes.func,
   user: PropTypes.shape({
-    id: PropTypes.string,
+    _id: PropTypes.string,
     nickname: PropTypes.string,
     email: PropTypes.string,
   }),

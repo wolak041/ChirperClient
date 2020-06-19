@@ -41,7 +41,6 @@ export default (state = initialState, action) => {
     }
     case USER_FEED_PART: {
       const { userFeed } = action.payload;
-      console.log(extractPostIds(userFeed));
 
       const updatedUserFeed = [...state.userFeed, ...userFeed];
       const lastPostDate = updatedUserFeed.slice(-1)[0].date;

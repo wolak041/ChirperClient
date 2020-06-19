@@ -3,7 +3,6 @@ const merge = require('webpack-merge');
 const common = require('./common.js');
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = env => {
@@ -11,9 +10,6 @@ module.exports = env => {
     mode: 'production',
     plugins: [
       new CleanWebpackPlugin(),
-      new CompressionPlugin({
-        test: /\.js$/,
-      }),
       new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     ],
     optimization: {

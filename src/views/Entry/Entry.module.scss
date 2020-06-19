@@ -60,7 +60,7 @@
       opacity: 0;
 
       &:checked + label {
-        background-color: $primary-active;
+        background-color: $primary;
       }
     }
 
@@ -74,7 +74,7 @@
       font-size: 18px;
       letter-spacing: 0.05em;
       text-align: center;
-      background-color: $primary;
+      background-color: $primary-dark;
       cursor: pointer;
       transition: background-color 0.2s ease;
 
@@ -88,11 +88,11 @@
 
       &:hover,
       &:focus {
-        background-color: $primary-active;
+        background-color: lighten($primary-dark, 5%);
       }
 
       &:active {
-        background-color: darken($primary-active, 5%);
+        background-color: darken($primary, 5%);
       }
     }
   }

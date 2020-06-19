@@ -16,11 +16,11 @@
 
   &:hover,
   &:focus {
-    background-color: $primary-active;
+    background-color: $primary-dark;
   }
 
   &:active {
-    background-color: darken($primary-active, 5%);
+    background-color: darken($primary-dark, 5%);
   }
 
   &:disabled {

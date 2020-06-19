@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const WebpackBar = require('webpackbar');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = env => {
   console.log(
@@ -28,7 +29,7 @@ module.exports = env => {
         short_name: 'Chirper',
         description: 'Social platform',
         background_color: '#092429',
-        theme_color: '#092429',
+        theme_color: '#000000',
         display: 'standalone',
         orientation: 'portrait-primary',
         start_url: '/',
@@ -36,11 +37,15 @@ module.exports = env => {
           {
             src: path.resolve(__dirname, '../src/assets/images/chirpy.png'),
             sizes: [96, 128, 192, 256, 384, 512],
-            ios: true
+            ios: true,
           },
         ],
         inject: true,
         ios: true,
+      }),
+      new WorkboxPlugin.GenerateSW({
+        clientsClaim: true,
+        skipWaiting: true,
       }),
       new WebpackBar(),
     ],

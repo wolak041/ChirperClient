@@ -9,7 +9,7 @@ const handleRequest = async request => {
 
 const entryRequestOptions = body => ({
   method: 'POST',
-  credentials: 'same-origin',
+  credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
   },

@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
@@ -20,6 +21,9 @@ module.exports = env => {
       path: path.resolve(__dirname, '../dist'),
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env.API_URL': JSON.stringify(env.API_URL),
+      }),
       new HtmlWebPackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
         favicon: path.resolve(__dirname, '../public/favicon.ico'),

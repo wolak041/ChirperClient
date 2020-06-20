@@ -4,8 +4,8 @@
   "description": "",
   "main": "./public/index.html",
   "scripts": {
-    "start": "webpack-dev-server --open --config=webpack/dev.js --env.development && npm run prettier-watch",
-    "build": "npm run lint && webpack -p --config=webpack/prod.js --env.production",
+    "start": "webpack-dev-server --open --config=webpack/dev.js --env.development --env.API_URL=http://localhost:3000 && npm run prettier-watch",
+    "build": "npm run lint && webpack -p --config=webpack/prod.js --env.production --env.API_URL=https://chirper-api.herokuapp.com",
     "api:build": "npm run build && npm run api:clear-build && npm run api:copy-build",
     "api:clear-build": "rimraf ../ChirperApi/public/*",
     "api:copy-build": "copyfiles -e dist/report.html -e dist/**/*.js -u 1 dist/**/*.* ../ChirperApi/public",

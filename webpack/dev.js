@@ -17,9 +17,6 @@ module.exports = env => {
       stats: 'minimal',
       hot: true,
       historyApiFallback: true,
-      proxy: {
-        '/api': 'http://localhost:3000/',
-      },
     },
     plugins: [new webpack.NamedModulesPlugin()],
     module: {

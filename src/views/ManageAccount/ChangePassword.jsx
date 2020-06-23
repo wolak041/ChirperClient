@@ -17,20 +17,22 @@ const ChangePassword = () => {
     resetForm,
   } = useFormik({
     initialValues: {
-      password: '',
-      repeatPassword: '',
+      oldPassword: '',
+      newPassword: '',
+      repeatNewPassword: '',
     },
     validationSchema: Yup.object({
-      password: Yup.string()
+      oldPassword: Yup.string().required('Field required'),
+      newPassword: Yup.string()
         .min(6, 'Password must be at least 6 character long')
         .required('Field required'),
-      repeatPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      repeatNewPassword: Yup.string()
+        .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
         .required('Field required'),
     }),
     onSubmit: async (values, formik) => {
       try {
-        const response = await changePassword(values.password);
+        const response = await changePassword(values.oldPassword, values.newPassword);
         formik.setStatus({ formInfo: response.message });
       } catch (err) {
         formik.setStatus({});
@@ -50,26 +52,38 @@ const ChangePassword = () => {
         <form onSubmit={handleSubmit} className={styles.form}>
           <Text
             type="password"
-            name="password"
-            label="New password"
-            value={values.password}
+            name="oldPassword"
+            label="Old password"
+            value={values.oldPassword}
             onChange={handleChange}
             onBlur={handleBlur}
           >
             <HelperText type="error">
-              {touched.password && errors.password}
+              {touched.oldPassword && errors.oldPassword}
             </HelperText>
           </Text>
           <Text
             type="password"
-            name="repeatPassword"
-            label="Repeat new password"
-            value={values.repeatPassword}
+            name="newPassword"
+            label="New password"
+            value={values.newPassword}
             onChange={handleChange}
             onBlur={handleBlur}
           >
             <HelperText type="error">
-              {touched.repeatPassword && errors.repeatPassword}
+              {touched.newPassword && errors.newPassword}
+            </HelperText>
+          </Text>
+          <Text
+            type="password"
+            name="repeatNewPassword"
+            label="Repeat new password"
+            value={values.repeatNewPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          >
+            <HelperText type="error">
+              {touched.repeatNewPassword && errors.repeatNewPassword}
             </HelperText>
           </Text>
           <Button attributes={{ type: 'submit' }}>Change password</Button>

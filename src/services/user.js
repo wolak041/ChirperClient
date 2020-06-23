@@ -36,8 +36,8 @@ export const isEmailAvailable = async email =>
 export const changeEmail = async newEmail =>
   await handleAuthRequest(apiUrls.CHANGE_EMAIL, 'POST', { newEmail });
 
-export const changePassword = async newPassword =>
-  await handleAuthRequest(apiUrls.CHANGE_PASSWORD, 'POST', { newPassword });
+export const changePassword = async (oldPassword, newPassword) =>
+  await handleAuthRequest(apiUrls.CHANGE_PASSWORD, 'POST', { oldPassword, newPassword });
 
 export const refreshAccessToken = async () => {
   const { accessToken } = await handleNonAuthRequest(

@@ -4,8 +4,6 @@ on:
   release:
     branches: [ master ]
 jobs:
-  env:
-    API_URL: https://chirper-api.herokuapp.com
 
   build:
 

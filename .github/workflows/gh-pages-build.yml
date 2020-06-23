@@ -2,7 +2,7 @@ name: ChirperClient Github Pages build
 
 on:
   release:
-
+    branches: [ master ]
 jobs:
   build:
 

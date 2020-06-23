@@ -3,7 +3,7 @@ import {
   USER_SUCCESS,
   USER_LOGOUT,
 } from '../actions/actionTypes';
-import { statusIndicators } from '../../helpers/constants';
+import { statusIndicators } from '../../constants';
 
 const initialState = {
   status: statusIndicators.PENDING,

@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Collapsible, Text, HelperText, Button } from '../../components';
-import { isEmailAvailable, changeEmail } from '../../helpers/services';
+import { isEmailAvailable, changeEmail } from '../../services';
 import styles from './ManageAccount.module.scss';
 
 const ChangeEmail = () => {

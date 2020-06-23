@@ -5,8 +5,8 @@ import {
   USER_FEED_ERROR,
   LIKE_POST_TOGGLE,
 } from '../actions/actionTypes';
-import { statusIndicators, feed } from '../../helpers/constants';
-import { extractPostIds, likePostToggle } from '../../helpers/services';
+import { statusIndicators, feed } from '../../constants';
+import { extractPostIds, likePostToggle } from '../../utils';
 
 const initialState = {
   status: statusIndicators.PENDING,
@@ -25,11 +25,10 @@ export default (state = initialState, action) => {
       };
     }
     case USER_FEED_REFRESH: {
-      const { userFeed } = action.payload;
-
-      const lastPostDate = userFeed.slice(-1)[0].date;
+      const { userFeed, user } = action.payload;
+      const lastPostDate = userFeed.slice(-1)[0]?.date || new Date();
       const lastPostsIds = extractPostIds(userFeed);
-      const user = userFeed[0].user;
+
       return {
         ...state,
         status: statusIndicators.SUCCESS,
@@ -43,7 +42,7 @@ export default (state = initialState, action) => {
       const { userFeed } = action.payload;
 
       const updatedUserFeed = [...state.userFeed, ...userFeed];
-      const lastPostDate = updatedUserFeed.slice(-1)[0].date;
+      const lastPostDate = updatedUserFeed.slice(-1)[0]?.date || new Date();
       const lastPostsIds = extractPostIds(
         userFeed.length
           ? userFeed

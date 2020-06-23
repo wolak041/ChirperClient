@@ -9,8 +9,8 @@ import {
   getUserFeed,
   likePostFetch,
   dislikePostFetch,
-} from '../../helpers/services';
-import { feed } from '../../helpers/constants';
+} from '../../services';
+import { feed } from '../../constants';
 
 const handleGetUserFeed = (
   lastPostDate,
@@ -24,7 +24,7 @@ const handleGetUserFeed = (
   });
 
   try {
-    const { feed: userFeed } = await getUserFeed(
+    const { feed: userFeed, user } = await getUserFeed(
       lastPostDate,
       limit,
       lastPostsIds,
@@ -33,7 +33,7 @@ const handleGetUserFeed = (
 
     dispatch({
       type: dispatchType,
-      payload: { userFeed },
+      payload: { userFeed, user },
     });
   } catch (error) {
     dispatch({

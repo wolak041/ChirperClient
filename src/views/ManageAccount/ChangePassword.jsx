@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Collapsible, Text, HelperText, Button } from '../../components';
-import { changePassword } from '../../helpers/services';
+import { changePassword } from '../../services';
 import styles from './ManageAccount.module.scss';
 
 const ChangePassword = () => {

@@ -11,8 +11,8 @@ import {
   getMainFeed,
   likePostFetch,
   dislikePostFetch,
-} from '../../helpers/services';
-import { feed } from '../../helpers/constants';
+} from '../../services';
+import { feed } from '../../constants';
 
 const handleGetMainFeed = (
   lastPostDate,
@@ -53,21 +53,17 @@ export const refreshMainFeed = () =>
 export const fetchMainFeed = (lastPostDate, limit, lastPostsIds) =>
   handleGetMainFeed(lastPostDate, limit, lastPostsIds, MAIN_FEED_PART);
 
-export const newPostChange = newPost => dispatch => {
-  dispatch({
-    type: NEW_POST_CHANGE,
-    payload: { newPost },
-  });
-};
+export const newPostChange = newPost => ({
+  type: NEW_POST_CHANGE,
+  payload: { newPost },
+});
 
-export const newPostSave = newPost => dispatch => {
-  dispatch({
-    type: NEW_POST_SAVE,
-    payload: { newPost },
-  });
-};
+export const newPostSave = newPost => ({
+  type: NEW_POST_SAVE,
+  payload: { newPost },
+});
 
-const likePostToggle = async (dispatch, postId, fetch) => {
+const likePostToggle = async (dispatch, postId, toggleLikeFetch) => {
   const dispatchLikeToggle = () =>
     dispatch({
       type: LIKE_POST_TOGGLE,
@@ -76,7 +72,7 @@ const likePostToggle = async (dispatch, postId, fetch) => {
 
   dispatchLikeToggle();
   try {
-    await fetch(postId);
+    await toggleLikeFetch(postId);
   } catch (error) {
     dispatchLikeToggle();
   }

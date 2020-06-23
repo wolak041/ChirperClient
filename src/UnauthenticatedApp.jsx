@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { Loading } from './components';
-import { clientUrls } from './helpers/constants';
+import { clientUrls } from './constants';
 
 const Entry = loadable(
   () =>

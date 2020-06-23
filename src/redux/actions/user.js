@@ -1,22 +1,35 @@
 import { USER_PENDING, USER_SUCCESS, USER_LOGOUT } from './actionTypes';
-import { getLoggedUser } from '../../helpers/services';
+import { getLoggedUser } from '../../services';
+import { removeAccessToken, getAccessToken } from '../../utils';
 
 export const fetchUser = () => async dispatch => {
   dispatch({
     type: USER_PENDING,
   });
 
-  try {
-    const { user } = await getLoggedUser();
+  if (getAccessToken()) {
+    try {
+      const { user } = await getLoggedUser();
 
-    dispatch({ type: USER_SUCCESS, payload: { user } });
-  } catch (error) {
-    dispatch({ type: USER_LOGOUT });
-  }
+      dispatch(saveUser(user));
+    } catch (error) {
+      dispatch(userLoggedOut());
+    }
+  } else dispatch(userLoggedOut());
 };
 
-export const saveUser = user => async dispatch =>
-  dispatch({ type: USER_SUCCESS, payload: { user } });
+export const saveUser = user => ({
+  type: USER_SUCCESS,
+  payload: { user },
+});
 
-export const userLogout = () => async dispatch =>
-  dispatch({ type: USER_LOGOUT });
+export const userLoggedOut = () => ({ type: USER_LOGOUT });
+
+export const userLogout = () => async dispatch => {
+  try {
+    removeAccessToken();
+    dispatch(userLoggedOut());
+  } catch (error) {
+    console.log(error);
+  }
+};

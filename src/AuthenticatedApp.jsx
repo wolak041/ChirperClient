@@ -3,8 +3,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { useDispatch } from 'react-redux';
 import { refreshMainFeed } from './redux/actions/mainFeed';
+import { userLoggedOut } from './redux/actions/user';
 import { MainLayout, Loading } from './components';
-import { clientUrls } from './helpers/constants';
+import { clientUrls } from './constants';
 
 const MainFeed = loadable(
   () =>
@@ -48,6 +49,20 @@ const AuthenticatedApp = () => {
   useEffect(() => {
     dispatch(refreshMainFeed());
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const syncLogout = event => {
+      if (event.key === 'accessToken' && !event.newValue) {
+        dispatch(userLoggedOut())
+      }
+    }
+    window.addEventListener('storage', syncLogout);
+
+    return () => {
+      window.removeEventListener('storage', syncLogout)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

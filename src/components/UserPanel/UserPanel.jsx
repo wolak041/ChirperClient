@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { clientUrls } from '../../helpers/constants';
+import { clientUrls } from '../../constants';
 import { Button } from '../';
 import userDefault from '../../assets/images/user-default.svg';
 import styles from './UserPanel.module.scss';

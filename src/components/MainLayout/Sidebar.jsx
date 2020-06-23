@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { UserPanel, Button } from '../';
 import ElementWrapper from './ElementWrapper';
-import { clientUrls } from '../../helpers/constants';
+import { clientUrls } from '../../constants';
 import styles from './MainLayout.module.scss';
 
 const Sidebar = props => {

@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUser } from './redux/actions/user';
 import { getUserState } from './redux/selectors';
-import { statusIndicators } from './helpers/constants';
+import { statusIndicators } from './constants';
 import { Loading } from './components';
 import AuthenticatedApp from './AuthenticatedApp';
 import UnauthenticatedApp from './UnauthenticatedApp';

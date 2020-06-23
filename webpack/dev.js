@@ -9,6 +9,7 @@ module.exports = env => {
     devtool: 'eval',
     devServer: {
       host: '0.0.0.0',
+      port: 80,
       contentBase: path.join(__dirname, '/public'),
       watchContentBase: true,
       open: true,

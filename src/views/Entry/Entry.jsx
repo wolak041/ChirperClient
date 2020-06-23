@@ -12,8 +12,8 @@ import {
   registerUser,
   isNicknameAvailable,
   isEmailAvailable,
-} from '../../helpers/services';
-import { clientUrls } from '../../helpers/constants';
+} from '../../services';
+import { clientUrls } from '../../constants';
 import chirpy from '../../assets/images/chirpy.png';
 import styles from './Entry.module.scss';
 

@@ -10,7 +10,7 @@ import {
   dislikePost,
 } from '../../redux/actions/userFeed';
 import { Post } from '../../components';
-import { statusIndicators, feed } from '../../helpers/constants';
+import { statusIndicators, feed } from '../../constants';
 import { debounce } from 'throttle-debounce';
 import userDefault from '../../assets/images/user-default.svg';
 import styles from './UserFeed.module.scss';

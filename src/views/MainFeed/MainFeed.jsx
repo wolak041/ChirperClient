@@ -11,8 +11,8 @@ import {
 } from '../../redux/actions/mainFeed';
 import { getMainFeedState, getUserState } from '../../redux/selectors';
 import { Post, Text, UserPanel, Button } from '../../components';
-import { statusIndicators, feed } from '../../helpers/constants';
-import { saveNewPost } from '../../helpers/services';
+import { statusIndicators, feed } from '../../constants';
+import { saveNewPost } from '../../services';
 import { debounce } from 'throttle-debounce';
 import styles from './MainFeed.module.scss';
 

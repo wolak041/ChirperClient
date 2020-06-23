@@ -34,7 +34,7 @@ export const handleAuthRequest = async (url, method, body) => {
     if (request.status === 401) {
       try {
         await refreshAccessToken();
-        handleAuthRequest()
+        return handleAuthRequest(url, method, body)
       } catch(error) {
         store.dispatch(userLogout());
       }

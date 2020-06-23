@@ -18,6 +18,9 @@ jobs:
       matrix:
         node-version: [12.x, 14.x]
 
+    env:
+      API_URL: https://chirper-api.herokuapp.com
+
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -29,7 +32,7 @@ jobs:
       with:
         persist-credentials: false
     - run: npm install
-    - run: npm run build --if-present
+    - run: npm run build
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.5.5
       with:

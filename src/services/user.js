@@ -18,31 +18,28 @@ export const loginUser = async credentials =>
 export const registerUser = async credentials =>
   await handleAuthentication(apiUrls.REGISTER, credentials);
 
-export const refreshToken = async () =>
-  await handleNonAuthRequest(apiUrls.REFRESH_TOKENS, 'POST');
-
 export const getLoggedUser = async () =>
-  await handleAuthRequest(apiUrls.GET_LOGGED_USER, 'POST');
+  await handleAuthRequest(apiUrls.GET_LOGGED_USER);
 
-const checkAvailability = async (url, body) =>
-  (await handleAuthRequest(url, 'POST', body)).isAvailable;
+const checkAvailability = async url =>
+  (await handleAuthRequest(url)).isAvailable;
 
 export const isNicknameAvailable = async nickname =>
-  checkAvailability(apiUrls.NICKNAME_AVAILABILITY, { nickname });
+  checkAvailability(`${apiUrls.NICKNAME_AVAILABILITY}/${nickname}`);
 
 export const isEmailAvailable = async email =>
-  checkAvailability(apiUrls.EMAIL_AVAILABILITY, { email });
+  checkAvailability(`${apiUrls.EMAIL_AVAILABILITY}/${email}`);
 
 export const changeEmail = async newEmail =>
   await handleAuthRequest(apiUrls.CHANGE_EMAIL, 'POST', { newEmail });
 
 export const changePassword = async (oldPassword, newPassword) =>
-  await handleAuthRequest(apiUrls.CHANGE_PASSWORD, 'POST', { oldPassword, newPassword });
+  await handleAuthRequest(apiUrls.CHANGE_PASSWORD, 'POST', {
+    oldPassword,
+    newPassword,
+  });
 
 export const refreshAccessToken = async () => {
-  const { accessToken } = await handleNonAuthRequest(
-    apiUrls.REFRESH_TOKENS,
-    'POST',
-  );
+  const { accessToken } = await handleNonAuthRequest(apiUrls.REFRESH_TOKENS);
   saveAccessToken(accessToken);
 };

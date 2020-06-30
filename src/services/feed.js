@@ -20,7 +20,7 @@ export const saveNewPost = async newPost =>
   await handleAuthRequest(apiUrls.SAVE_POST, 'POST', { newPost });
 
 export const likePostFetch = async postId =>
-  await handleAuthRequest(apiUrls.LIKE_POST, 'POST', { postId });
+  await handleAuthRequest(apiUrls.LIKE_POST, 'PUT', { postId });
 
 export const dislikePostFetch = async postId =>
-  await handleAuthRequest(apiUrls.DISLIKE_POST, 'POST', { postId });
+  await handleAuthRequest(apiUrls.DISLIKE_POST, 'PUT', { postId });
